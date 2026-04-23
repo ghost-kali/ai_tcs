@@ -1,0 +1,86 @@
+server:
+  port: 8080
+  max-http-header-size: 65536
+
+spring:
+  application:
+    name: api-gateway
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      timeout: 2000ms
+
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials X-Request-ID X-Correlation-ID
+
+      routes:
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
+
+        - id: product-public
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/products/**
+
+        - id: category-public
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/public/categories/**
+
+        - id: cart-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/carts/**
+
+        - id: cart-create-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/cart/**
+
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/orders/**, /api/admin/orders/**, /api/addresses/**, /api/seller/orders/**
+
+        - id: payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payments/**
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
+jwt:
+  secret: ${JWT_SECRET:mySuperSecretKeyForJwtAuthenticationWhichIsAtLeast32BytesLong12345}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cookieName: springBootEcom
