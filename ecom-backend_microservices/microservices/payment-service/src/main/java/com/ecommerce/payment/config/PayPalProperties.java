@@ -15,5 +15,10 @@ public class PayPalProperties {
     private String cancelUrl;
     private String brandName = "E-Commerce Store";
     private String currency = "USD";
-}
 
+    /**
+     * When true, uses PayPal sandbox environment; when false, uses live.
+     * If unset, defaults to true.
+     */
+    private boolean sandbox = true;
+}
