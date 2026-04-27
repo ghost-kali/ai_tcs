@@ -14,7 +14,7 @@ const Filter = ({ categories }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        const currentCategory = searchParams.get("category") || "all";
+        const currentCategory = searchParams.get("categoryId") || "all";
         const currentSortOrder = searchParams.get("sortby") || "asc";
         const currentSearchTerm = searchParams.get("keyword") || "";
 
@@ -42,9 +42,9 @@ const Filter = ({ categories }) => {
         const selectedCategory = event.target.value;
 
         if (selectedCategory === "all") {
-            params.delete("category");
+            params.delete("categoryId");
         } else {
-            params.set("category", selectedCategory);
+            params.set("categoryId", selectedCategory);
         }
         navigate(`${pathname}?${params}`);
         setCategory(event.target.value);
@@ -92,7 +92,7 @@ const Filter = ({ categories }) => {
                          >
                             <MenuItem value="all">All</MenuItem>
                             {categories.map((item) => (
-                                <MenuItem key={item.categoryId} value={item.categoryName}>
+                                <MenuItem key={item.categoryId} value={String(item.categoryId)}>
                                     {item.categoryName}
                                 </MenuItem>
                             ))}

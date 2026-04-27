@@ -25,11 +25,11 @@ const useProductFilter = () => {
         params.set("sortDirection", sortOrder); // ✅ backend expects this
 
         // OPTIONAL FILTERS
-        const categoryParams = searchParams.get("category");
+        const categoryId = searchParams.get("categoryId");
         const keyword = searchParams.get("keyword");
 
-        if (categoryParams) {
-            params.set("category", categoryParams);
+        if (categoryId) {
+            params.set("categoryId", categoryId);
         }
 
         if (keyword) {

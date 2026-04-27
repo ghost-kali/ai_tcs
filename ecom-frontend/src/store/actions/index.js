@@ -3,15 +3,42 @@ import api from "../../api/api";
 export const fetchProducts = (queryString) => async (dispatch) => {
   try {
     dispatch({ type: "IS_FETCHING" });
-    const { data } = await api.get(`/products?${queryString}`);
+    const qs = new URLSearchParams(queryString);
+    const keyword = qs.get("keyword");
+    const categoryId = qs.get("categoryId");
+    const page = Number(qs.get("page") ?? 0);
+    const size = Number(qs.get("size") ?? 20);
+
+    let data;
+    if (keyword && categoryId) {
+      const res = await api.get(
+        `/products/search?keyword=${encodeURIComponent(keyword)}&categoryId=${encodeURIComponent(categoryId)}&page=${page}&size=${size}`,
+      );
+      data = res.data;
+    } else if (keyword) {
+      const res = await api.get(`/products/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=${size}`);
+      data = res.data;
+    } else if (categoryId) {
+      const res = await api.get(`/products/category/${categoryId}?page=${page}&size=${size}`);
+      data = res.data;
+    } else {
+      const res = await api.get(`/products?${queryString}`);
+      data = res.data;
+    }
+
+    // Spring `Page<T>` compatibility: support both custom and default field names.
+    const pageNumber = data.pageNumber ?? data.number ?? data.pageable?.pageNumber ?? 0;
+    const pageSize = data.pageSize ?? data.size ?? data.pageable?.pageSize ?? 20;
+    const lastPage = data.lastPage ?? data.last ?? false;
+
     dispatch({
       type: "FETCH_PRODUCTS",
       payload: data.content,
-      pageNumber: data.pageNumber,
-      pageSize: data.pageSize,
+      pageNumber,
+      pageSize,
       totalElements: data.totalElements,
       totalPages: data.totalPages,
-      lastPage: data.lastPage,
+      lastPage,
     });
     dispatch({ type: "IS_SUCCESS" });
   } catch (error) {

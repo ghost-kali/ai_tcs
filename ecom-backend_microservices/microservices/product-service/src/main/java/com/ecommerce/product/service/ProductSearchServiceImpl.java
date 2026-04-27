@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -75,8 +76,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
             // Delete existing index
             productSearchRepository.deleteAll();
             
-            // Fetch all active products
-            List<Product> products = productRepository.findByActiveTrue(Pageable.unpaged()).getContent();
+            // Fetch all products (do not restrict to active=true; otherwise many items never get indexed)
+            List<Product> products = productRepository.findAll(Pageable.unpaged()).getContent();
             
             // Convert to documents and index
             List<ProductDocument> documents = products.stream()
@@ -101,8 +102,56 @@ public class ProductSearchServiceImpl implements ProductSearchService {
     @Override
     public Page<ProductDTO> searchProducts(String query, Pageable pageable) {
         try {
-            Page<ProductDocument> results = productSearchRepository.globalSearch(query, pageable);
-            return results.map(this::convertToDTO);
+            if (query == null || query.isBlank()) {
+                Page<ProductDocument> results = productSearchRepository.findByActiveTrue(pageable);
+                return results.map(this::convertToDTO);
+            }
+
+            String q = query.trim();
+
+            // Combine a relevance multi_match with a substring wildcard so terms like "phone"
+            // can match tokens like "iphone" produced by the standard analyzer.
+            BoolQuery.Builder boolQuery = new BoolQuery.Builder()
+                    .should(QueryBuilders.multiMatch()
+                            .query(q)
+                            .fields("productName^3", "description^2", "brand", "categoryName")
+                            .type(TextQueryType.BestFields)
+                            .fuzziness("AUTO")
+                            .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                            .field("productName")
+                            .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                            .caseInsensitive(true)
+                            .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                            .field("description")
+                            .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                            .caseInsensitive(true)
+                            .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                            .field("brand")
+                            .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                            .caseInsensitive(true)
+                            .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                            .field("categoryName")
+                            .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                            .caseInsensitive(true)
+                            .build()._toQuery())
+                    .minimumShouldMatch("1");
+
+            NativeQuery nativeQuery = NativeQuery.builder()
+                    .withQuery(boolQuery.build()._toQuery())
+                    .withPageable(pageable)
+                    .build();
+
+            SearchHits<ProductDocument> searchHits = elasticsearchTemplate.search(nativeQuery, ProductDocument.class);
+            List<ProductDTO> products = searchHits.getSearchHits().stream()
+                    .map(SearchHit::getContent)
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+
+            return new PageImpl<>(products, pageable, searchHits.getTotalHits());
         } catch (Exception e) {
             log.error("Error searching products for query: {}", query, e);
             return Page.empty();
@@ -117,11 +166,35 @@ public class ProductSearchServiceImpl implements ProductSearchService {
             
             // Text search
             if (criteria.getQuery() != null && !criteria.getQuery().isEmpty()) {
-                boolQuery.must(QueryBuilders.multiMatch()
-                    .query(criteria.getQuery())
-                    .fields("productName^3", "description^2", "brand", "categoryName")
-                    .type(TextQueryType.BestFields)
-                    .build()._toQuery());
+                String q = criteria.getQuery().trim();
+                boolQuery
+                    .should(QueryBuilders.multiMatch()
+                        .query(q)
+                        .fields("productName^3", "description^2", "brand", "categoryName")
+                        .type(TextQueryType.BestFields)
+                        .fuzziness("AUTO")
+                        .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                        .field("productName")
+                        .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                        .caseInsensitive(true)
+                        .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                        .field("description")
+                        .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                        .caseInsensitive(true)
+                        .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                        .field("brand")
+                        .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                        .caseInsensitive(true)
+                        .build()._toQuery())
+                    .should(QueryBuilders.wildcard()
+                        .field("categoryName")
+                        .value("*" + q.toLowerCase(Locale.ROOT) + "*")
+                        .caseInsensitive(true)
+                        .build()._toQuery())
+                    .minimumShouldMatch("1");
             }
             
             // Category filter

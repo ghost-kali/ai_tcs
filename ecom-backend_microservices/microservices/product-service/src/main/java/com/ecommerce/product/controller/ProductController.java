@@ -101,11 +101,12 @@ public class ProductController {
     @Operation(summary = "Search products by keyword")
     public ResponseEntity<Page<ProductDTO>> searchProducts(
             @RequestParam String keyword,
+            @RequestParam(required = false) Long categoryId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
         
         Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDTO> products = productService.searchProducts(keyword, pageable);
+        Page<ProductDTO> products = productService.searchProducts(keyword, categoryId, pageable);
         return ResponseEntity.ok(products);
     }
     

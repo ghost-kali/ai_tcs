@@ -165,11 +165,11 @@ public class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    @Cacheable(value = "productSearch", key = "#keyword + '-' + #pageable.pageNumber + '-' + #pageable.pageSize")
-    public Page<ProductDTO> searchProducts(String keyword, Pageable pageable) {
-        log.info("Searching products with keyword: {}", keyword);
-        
-        Page<Product> products = productRepository.findByProductNameContainingIgnoreCaseAndActiveTrue(keyword, pageable);
+    @Cacheable(value = "productSearch", key = "#keyword + '-' + #categoryId + '-' + #pageable.pageNumber + '-' + #pageable.pageSize")
+    public Page<ProductDTO> searchProducts(String keyword, Long categoryId, Pageable pageable) {
+        log.info("Searching products with keyword: {} categoryId: {}", keyword, categoryId);
+
+        Page<Product> products = productRepository.searchByKeyword(keyword, categoryId, pageable);
         return products.map(this::convertToDTO);
     }
     

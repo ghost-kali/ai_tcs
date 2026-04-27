@@ -31,6 +31,12 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrdersForAdmin(pageNumber, 10));
     }
 
+    @GetMapping("/api/orders/my")
+    public ResponseEntity<PageResponse<OrderResponse>> getMyOrders(@RequestParam(defaultValue = "0") int pageNumber) {
+        JwtAuthenticationToken auth = currentAuth();
+        return ResponseEntity.ok(orderService.getOrdersForUser(auth.getUserId(), pageNumber, 10));
+    }
+
     @GetMapping("/api/admin/orders")
     public ResponseEntity<PageResponse<OrderResponse>> getAdminOrders(@RequestParam(defaultValue = "0") int pageNumber) {
         return ResponseEntity.ok(orderService.getOrdersForAdmin(pageNumber, 10));

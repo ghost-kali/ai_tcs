@@ -20,7 +20,7 @@ public interface ProductService {
     
     Page<ProductDTO> getProductsByCategory(Long categoryId, Pageable pageable);
     
-    Page<ProductDTO> searchProducts(String keyword, Pageable pageable);
+    Page<ProductDTO> searchProducts(String keyword, Long categoryId, Pageable pageable);
     
     Page<ProductDTO> getProductsBySeller(Long sellerId, Pageable pageable);
     
