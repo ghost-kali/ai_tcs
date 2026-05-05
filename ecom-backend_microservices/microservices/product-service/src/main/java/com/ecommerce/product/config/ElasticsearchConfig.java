@@ -1,6 +1,7 @@
 package com.ecommerce.product.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
+@ConditionalOnProperty(name = "app.elasticsearch.enabled", havingValue = "true", matchIfMissing = true)
 @EnableElasticsearchRepositories(basePackages = "com.ecommerce.product.repository.elasticsearch")
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
     

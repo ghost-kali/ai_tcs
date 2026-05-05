@@ -2,12 +2,7 @@ package com.ecommerce.product.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -29,6 +24,7 @@ import com.ecommerce.product.model.Product;
 import com.ecommerce.product.model.elasticsearch.ProductDocument;
 import com.ecommerce.product.repository.jpa.CategoryRepository;
 import com.ecommerce.product.repository.jpa.ProductRepository;
+import com.ecommerce.product.storage.ProductImageStorage;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,9 +40,7 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper modelMapper;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ProductSearchService productSearchService;
-    
-    @Value("${product.image.upload-dir}")
-    private String uploadDir;
+    private final ProductImageStorage productImageStorage;
     
     @Value("${kafka.topics.product-events}")
     private String productEventsTopic;
@@ -241,6 +235,15 @@ public class ProductServiceImpl implements ProductService {
         
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
+
+        String imageRef = product.getImage();
+        if (imageRef != null && !imageRef.isBlank()) {
+            try {
+                productImageStorage.deleteProductImage(imageRef);
+            } catch (Exception ex) {
+                log.warn("Failed to delete product image for productId={}", productId, ex);
+            }
+        }
         
         // Soft delete
         product.setActive(false);
@@ -260,9 +263,18 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
         
         try {
-            String fileName = saveImage(image);
-            product.setImage(fileName);
+            String previousImage = product.getImage();
+            String imageRef = productImageStorage.uploadProductImage(productId, image);
+            product.setImage(imageRef);
             Product updatedProduct = productRepository.save(product);
+
+            if (previousImage != null && !previousImage.isBlank() && !previousImage.equals(imageRef)) {
+                try {
+                    productImageStorage.deleteProductImage(previousImage);
+                } catch (Exception ex) {
+                    log.warn("Failed to delete previous product image for productId={}", productId, ex);
+                }
+            }
             
             return convertToDTO(updatedProduct);
         } catch (IOException e) {
@@ -356,20 +368,6 @@ public class ProductServiceImpl implements ProductService {
         }
         
         return dto;
-    }
-    
-    private String saveImage(MultipartFile image) throws IOException {
-        String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
-        Path uploadPath = Paths.get(uploadDir);
-        
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-        
-        Path filePath = uploadPath.resolve(fileName);
-        Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        
-        return fileName;
     }
     
     private void publishProductEvent(String eventType, Product product) {

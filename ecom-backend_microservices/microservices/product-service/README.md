@@ -394,8 +394,14 @@ ELASTICSEARCH_PASSWORD: elastic
 # Kafka
 KAFKA_BOOTSTRAP_SERVERS: localhost:9092
 
-# File Upload
-UPLOAD_DIR: ./uploads/products
+# Azure Blob Storage (required)
+IMAGE_STORAGE_PROVIDER: azure
+AZURE_STORAGE_CONNECTION_STRING: "<your-connection-string>"
+AZURE_STORAGE_CONTAINER: ecom-product-images
+AZURE_STORAGE_ACCOUNT: ecomtcs
+AZURE_PUBLIC_BASE_URL: "https://ecomtcs.blob.core.windows.net/ecom-product-images"
+
+# Upload limits
 MAX_FILE_SIZE: 5MB
 ```
 
@@ -435,9 +441,13 @@ spring:
       max-file-size: ${MAX_FILE_SIZE:5MB}
       max-request-size: ${MAX_FILE_SIZE:5MB}
 
-app:
-  upload:
-    dir: ${UPLOAD_DIR:./uploads/products}
+storage:
+  provider: ${IMAGE_STORAGE_PROVIDER:azure} # azure only
+  azure:
+    connection-string: ${AZURE_STORAGE_CONNECTION_STRING:}
+    container: ${AZURE_STORAGE_CONTAINER:ecom-product-images}
+    account-name: ${AZURE_STORAGE_ACCOUNT:}
+    public-base-url: ${AZURE_PUBLIC_BASE_URL:}
 ```
 
 ## Events Published

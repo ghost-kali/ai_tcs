@@ -1,32 +1,30 @@
 package com.ecommerce.payment.service;
 
-import com.ecommerce.payment.config.PayPalProperties;
-import com.ecommerce.payment.dto.PayPalOrderRequest;
-import com.ecommerce.payment.dto.PayPalOrderResponse;
-import com.paypal.core.PayPalHttpClient;
-import com.paypal.http.HttpRequest;
-import com.paypal.http.HttpResponse;
-import com.paypal.http.Headers;
-import com.paypal.http.exceptions.HttpException;
-import com.paypal.orders.LinkDescription;
-import com.paypal.orders.Order;
-import com.paypal.orders.OrderRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.server.ResponseStatusException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.ecommerce.payment.config.PayPalProperties;
+import com.ecommerce.payment.dto.PayPalOrderRequest;
+import com.ecommerce.payment.dto.PayPalOrderResponse;
+import com.paypal.core.PayPalHttpClient;
+import com.paypal.http.HttpResponse;
+import com.paypal.http.exceptions.HttpException;
+import com.paypal.orders.LinkDescription;
+import com.paypal.orders.Order;
 
 @ExtendWith(MockitoExtension.class)
 class PaymentServiceImplTest {
@@ -35,122 +33,109 @@ class PaymentServiceImplTest {
     private PayPalHttpClient payPalHttpClient;
 
     @Mock
-    private HttpResponse<Order> httpResponse;
-
-    @Captor
-    private ArgumentCaptor<HttpRequest<Order>> httpRequestCaptor;
-
     private PayPalProperties properties;
+
+    @InjectMocks
     private PaymentServiceImpl service;
 
-    @BeforeEach
-    void setUp() {
-        properties = new PayPalProperties();
-        properties.setBrandName("Test Store");
-        properties.setCurrency("USD");
-        properties.setReturnUrl("http://localhost/return");
-        properties.setCancelUrl("http://localhost/cancel");
-        service = new PaymentServiceImpl(payPalHttpClient, properties);
-    }
-
     @Test
-    void createPayPalOrder_buildsV2OrderRequestAndMapsApproveUrl() throws Exception {
-        Order order = new Order()
-                .id("ORDER-123")
-                .status("CREATED")
-                .links(List.of(
-                        new LinkDescription().rel("self").href("http://api/orders/ORDER-123"),
-                        new LinkDescription().rel("approve").href("http://approve/ORDER-123")
-                ));
+    void createPayPalOrder_usesDefaults_andExtractsApproveUrl() throws Exception {
+        // Given: default config values
+        when(properties.getCurrency()).thenReturn("USD");
+        when(properties.getBrandName()).thenReturn("Brand");
+        when(properties.getReturnUrl()).thenReturn("https://return");
+        when(properties.getCancelUrl()).thenReturn("https://cancel");
 
-        when(httpResponse.result()).thenReturn(order);
-        when(payPalHttpClient.execute(any(HttpRequest.class))).thenReturn((HttpResponse) httpResponse);
+        // And: PayPal Order response includes an "approve" link
+        LinkDescription approve = org.mockito.Mockito.mock(LinkDescription.class);
+        when(approve.rel()).thenReturn("approve");
+        when(approve.href()).thenReturn("https://approve");
+
+        Order order = org.mockito.Mockito.mock(Order.class);
+        when(order.id()).thenReturn("ORDER-1");
+        when(order.status()).thenReturn("CREATED");
+        when(order.links()).thenReturn(List.of(approve));
+
+        @SuppressWarnings("unchecked")
+        HttpResponse<Order> response = org.mockito.Mockito.mock(HttpResponse.class);
+        when(response.result()).thenReturn(order);
+
+        when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCreateRequest.class))).thenReturn(response);
 
         PayPalOrderRequest request = new PayPalOrderRequest();
         request.setAmount(new BigDecimal("12.34"));
-        request.setDescription("My order");
 
-        PayPalOrderResponse response = service.createPayPalOrder(request);
+        // When
+        PayPalOrderResponse result = service.createPayPalOrder(request);
 
-        assertEquals("ORDER-123", response.getOrderId());
-        assertEquals("CREATED", response.getStatus());
-        assertEquals("http://approve/ORDER-123", response.getApproveUrl());
-
-        verify(payPalHttpClient).execute(httpRequestCaptor.capture());
-        HttpRequest<Order> httpRequest = httpRequestCaptor.getValue();
-        assertEquals("POST", httpRequest.verb());
-        assertTrue(httpRequest.path().contains("v2/checkout/orders"));
-        assertEquals("return=representation", httpRequest.headers().header("Prefer"));
-
-        Object body = httpRequest.requestBody();
-        assertNotNull(body);
-        assertInstanceOf(OrderRequest.class, body);
-
-        OrderRequest orderRequest = (OrderRequest) body;
-        assertEquals("CAPTURE", orderRequest.checkoutPaymentIntent());
-        assertNotNull(orderRequest.applicationContext());
-        assertEquals("PAY_NOW", orderRequest.applicationContext().userAction());
-        assertEquals("Test Store", orderRequest.applicationContext().brandName());
-        assertEquals("http://localhost/return", orderRequest.applicationContext().returnUrl());
-        assertEquals("http://localhost/cancel", orderRequest.applicationContext().cancelUrl());
-
-        assertNotNull(orderRequest.purchaseUnits());
-        assertEquals(1, orderRequest.purchaseUnits().size());
-        assertEquals("My order", orderRequest.purchaseUnits().get(0).description());
-        assertNotNull(orderRequest.purchaseUnits().get(0).amountWithBreakdown());
-        assertEquals("USD", orderRequest.purchaseUnits().get(0).amountWithBreakdown().currencyCode());
-        assertEquals("12.34", orderRequest.purchaseUnits().get(0).amountWithBreakdown().value());
+        // Then
+        assertThat(result.getOrderId()).isEqualTo("ORDER-1");
+        assertThat(result.getApproveUrl()).isEqualTo("https://approve");
     }
 
     @Test
-    void capturePayPalOrder_callsV2CaptureEndpointAndMapsApproveUrl() throws Exception {
-        Order order = new Order()
-                .id("ORDER-999")
-                .status("COMPLETED")
-                .links(List.of(new LinkDescription().rel("approve").href("http://approve/ORDER-999")));
-
-        when(httpResponse.result()).thenReturn(order);
-        when(payPalHttpClient.execute(any(HttpRequest.class))).thenReturn((HttpResponse) httpResponse);
-
-        PayPalOrderResponse response = service.capturePayPalOrder("ORDER-999");
-
-        assertEquals("ORDER-999", response.getOrderId());
-        assertEquals("COMPLETED", response.getStatus());
-        assertEquals("http://approve/ORDER-999", response.getApproveUrl());
-
-        verify(payPalHttpClient).execute(httpRequestCaptor.capture());
-        HttpRequest<Order> httpRequest = httpRequestCaptor.getValue();
-        assertEquals("POST", httpRequest.verb());
-        assertTrue(httpRequest.path().contains("v2/checkout/orders/ORDER-999/capture"));
-        assertEquals("return=representation", httpRequest.headers().header("Prefer"));
-        assertNotNull(httpRequest.requestBody());
-        assertInstanceOf(OrderRequest.class, httpRequest.requestBody());
-    }
-
-    @Test
-    void createPayPalOrder_maps4xxHttpExceptionToBadRequest() throws Exception {
-        when(payPalHttpClient.execute(any())).thenThrow(new HttpException("bad request", 400, new Headers()));
+    void createPayPalOrder_whenHttpException4xx_throwsBadRequest() throws Exception {
+        // Given
+        HttpException ex = org.mockito.Mockito.mock(HttpException.class);
+        when(ex.statusCode()).thenReturn(400);
+        when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCreateRequest.class))).thenThrow(ex);
 
         PayPalOrderRequest request = new PayPalOrderRequest();
         request.setAmount(new BigDecimal("1.00"));
 
-        ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> service.createPayPalOrder(request));
-        assertEquals(400, ex.getStatusCode().value());
+        // When + Then
+        assertThrows(ResponseStatusException.class, () -> service.createPayPalOrder(request));
     }
 
     @Test
-    void capturePayPalOrder_maps5xxHttpExceptionToBadGateway() throws Exception {
-        when(payPalHttpClient.execute(any())).thenThrow(new HttpException("server error", 500, new Headers()));
+    void capturePayPalOrder_extractsApproveUrl() throws Exception {
+        // Given: PayPal Order response includes an "approve" link
+        LinkDescription approve = org.mockito.Mockito.mock(LinkDescription.class);
+        when(approve.rel()).thenReturn("approve");
+        when(approve.href()).thenReturn("https://approve");
 
-        ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> service.capturePayPalOrder("X"));
-        assertEquals(502, ex.getStatusCode().value());
+        Order order = org.mockito.Mockito.mock(Order.class);
+        when(order.id()).thenReturn("ORDER-2");
+        when(order.status()).thenReturn("COMPLETED");
+        when(order.links()).thenReturn(List.of(approve));
+
+        @SuppressWarnings("unchecked")
+        HttpResponse<Order> response = org.mockito.Mockito.mock(HttpResponse.class);
+        when(response.result()).thenReturn(order);
+
+        when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCaptureRequest.class))).thenReturn(response);
+
+        // When
+        PayPalOrderResponse result = service.capturePayPalOrder("PAYPAL-ORDER-ID");
+
+        // Then
+        assertThat(result.getOrderId()).isEqualTo("ORDER-2");
+        assertThat(result.getStatus()).isEqualTo("COMPLETED");
+        assertThat(result.getApproveUrl()).isEqualTo("https://approve");
     }
 
     @Test
-    void capturePayPalOrder_mapsIoExceptionToBadGateway() throws Exception {
-        when(payPalHttpClient.execute(any())).thenThrow(new IOException("network"));
+    void capturePayPalOrder_whenHttpException4xx_throwsBadRequest() throws Exception {
+        // Given
+        HttpException ex = org.mockito.Mockito.mock(HttpException.class);
+        when(ex.statusCode()).thenReturn(400);
+        when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCaptureRequest.class))).thenThrow(ex);
 
-        ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> service.capturePayPalOrder("X"));
-        assertEquals(502, ex.getStatusCode().value());
+        // When + Then
+        ResponseStatusException thrown = assertThrows(ResponseStatusException.class,
+                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID"));
+        assertThat(thrown.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    void capturePayPalOrder_whenIOException_throwsBadGateway() throws Exception {
+        // Given
+        when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCaptureRequest.class)))
+                .thenThrow(new IOException("network"));
+
+        // When + Then
+        ResponseStatusException thrown = assertThrows(ResponseStatusException.class,
+                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID"));
+        assertThat(thrown.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
 }

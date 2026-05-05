@@ -465,11 +465,28 @@ export const updateOrderStatusFromDashboard =
   };
 
 export const dashboardProductsAction =
-  (queryString, isAdmin) => async (dispatch) => {
+  (queryString, isAdmin) => async (dispatch, getState) => {
     try {
       dispatch({ type: "IS_FETCHING" });
-      const endpoint = isAdmin ? "/products" : "/seller/products";
-      const { data } = await api.get(`${endpoint}?${queryString}`);
+
+      const state = getState();
+      const resolvedIsAdmin =
+        typeof isAdmin === "boolean"
+          ? isAdmin
+          : Boolean(state?.auth?.user?.roles?.includes("ROLE_ADMIN"));
+
+      let resolvedQueryString = queryString;
+      if (!resolvedQueryString) {
+        const pageNumber = state?.products?.pagination?.pageNumber ?? 0;
+        const pageSize = state?.products?.pagination?.pageSize ?? 20;
+        const params = new URLSearchParams();
+        params.set("page", pageNumber);
+        params.set("size", pageSize);
+        resolvedQueryString = params.toString();
+      }
+
+      const endpoint = resolvedIsAdmin ? "/products" : "/seller/products";
+      const { data } = await api.get(`${endpoint}?${resolvedQueryString}`);
       dispatch({
         type: "FETCH_PRODUCTS",
         payload: data.content,
@@ -507,7 +524,7 @@ export const updateProductFromDashboard =
       reset();
       setLoader(false);
       setOpen(false);
-      await dispatch(dashboardProductsAction());
+      await dispatch(dashboardProductsAction(undefined, isAdmin));
     } catch (error) {
       toast.error(
         error?.response?.data?.description || "Product update failed",
@@ -558,7 +575,7 @@ export const deleteProduct =
       toast.success("Product deleted successfully");
       setLoader(false);
       setOpenDeleteModal(false);
-      await dispatch(dashboardProductsAction());
+      await dispatch(dashboardProductsAction(undefined, isAdmin));
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Some Error Occured");
@@ -581,7 +598,7 @@ export const updateProductImageFromDashboard =
       toast.success("Image upload successful");
       setLoader(false);
       setOpen(false);
-      await dispatch(dashboardProductsAction());
+      await dispatch(dashboardProductsAction(undefined, isAdmin));
     } catch (error) {
       toast.error(
         error?.response?.data?.description || "Product Image upload failed",

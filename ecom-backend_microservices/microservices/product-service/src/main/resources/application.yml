@@ -5,7 +5,7 @@ spring:
   application:
     name: product-service
   config:
-    import: "configserver:http://localhost:8888"
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/product_db
     username: ${POSTGRES_USER:postgres}
@@ -35,5 +35,10 @@ spring:
       max-request-size: ${MAX_FILE_SIZE:5MB}
 
 app:
-  upload:
-    dir: ${UPLOAD_DIR:./uploads/products}
+storage:
+  provider: ${IMAGE_STORAGE_PROVIDER:azure} # azure only
+  azure:
+    connection-string: ${AZURE_STORAGE_CONNECTION_STRING}
+    container: ${AZURE_STORAGE_CONTAINER:}
+    account-name: ${AZURE_STORAGE_ACCOUNT:}
+    public-base-url: ${AZURE_PUBLIC_BASE_URL:}

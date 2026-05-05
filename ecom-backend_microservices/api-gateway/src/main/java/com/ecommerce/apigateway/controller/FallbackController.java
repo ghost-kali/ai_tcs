@@ -2,7 +2,6 @@ package com.ecommerce.apigateway.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +12,7 @@ import java.util.Map;
 @RequestMapping("/fallback")
 public class FallbackController {
 
-    @GetMapping("/products")
+    @RequestMapping("/products")
     public ResponseEntity<Map<String, Object>> productServiceFallback() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Product service is temporarily unavailable. Please try again later.");
@@ -23,7 +22,7 @@ public class FallbackController {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 
-    @GetMapping("/orders")
+    @RequestMapping("/orders")
     public ResponseEntity<Map<String, Object>> orderServiceFallback() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Order service is temporarily unavailable. Please try again later.");
@@ -33,7 +32,7 @@ public class FallbackController {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 
-    @GetMapping("/carts")
+    @RequestMapping("/carts")
     public ResponseEntity<Map<String, Object>> cartServiceFallback() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Cart service is temporarily unavailable. Please try again later.");
@@ -43,7 +42,7 @@ public class FallbackController {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 
-    @GetMapping("/users")
+    @RequestMapping("/users")
     public ResponseEntity<Map<String, Object>> userServiceFallback() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "User service is temporarily unavailable. Please try again later.");
@@ -53,7 +52,7 @@ public class FallbackController {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 
-    @GetMapping("/default")
+    @RequestMapping("/default")
     public ResponseEntity<Map<String, Object>> defaultFallback() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Service is temporarily unavailable. Please try again later.");
