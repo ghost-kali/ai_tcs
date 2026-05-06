@@ -1,5 +1,6 @@
 import { FaEdit, FaEye, FaImage, FaTrashAlt } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
+import { Chip, Stack, Tooltip, Typography } from "@mui/material";
 
 export const adminProductTableColumn = (
   handleEdit,
@@ -174,6 +175,83 @@ export const adminOrderTableColumn = (handleEdit) => [
     headerClassName: "text-black font-semibold text-center border ",
     cellClassName: "text-slate-700 font-normal border text-center",
     renderHeader: (params) => <span>Email</span>,
+  },
+  {
+    // Column for showing ordered products.
+    disableColumnMenu: true,
+    field: "orderItems",
+    headerName: "Products",
+    align: "left",
+    minWidth: 420,
+    flex: 1,
+    editable: false,
+    sortable: false,
+    headerAlign: "center",
+    headerClassName: "text-black font-semibold text-center border ",
+    cellClassName: "text-slate-700 font-normal border",
+    renderHeader: () => <span>Products</span>,
+    renderCell: (params) => {
+      const items = Array.isArray(params?.row?.orderItems)
+        ? params.row.orderItems
+        : [];
+
+      if (items.length === 0) {
+        return <span className="text-slate-400">-</span>;
+      }
+
+      const toLabel = (orderItem) => {
+        const name =
+          orderItem?.product?.productName ??
+          orderItem?.productName ??
+          orderItem?.product?.name ??
+          orderItem?.name ??
+          (orderItem?.product?.productId || orderItem?.productId
+            ? `Product #${orderItem?.product?.productId || orderItem?.productId}`
+            : "Unknown product");
+        const qty = orderItem?.quantity ?? 1;
+        return `${name} x${qty}`;
+      };
+
+      const labels = items.map(toLabel);
+      const preview = labels.slice(0, 2);
+      const remaining = labels.length - preview.length;
+
+      return (
+        <Tooltip
+          arrow
+          placement="top"
+          title={
+            <Stack spacing={0.5} sx={{ py: 0.5 }}>
+              {labels.map((label, idx) => (
+                <Typography key={`${label}-${idx}`} variant="body2">
+                  {label}
+                </Typography>
+              ))}
+            </Stack>
+          }
+        >
+          <Stack spacing={0.5} sx={{ width: "100%" }}>
+            <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
+              {preview.map((label, idx) => (
+                <Chip
+                  key={`${label}-${idx}`}
+                  size="small"
+                  label={label}
+                  variant="outlined"
+                />
+              ))}
+              {remaining > 0 ? (
+                <Chip
+                  size="small"
+                  label={`+${remaining} more`}
+                  variant="filled"
+                />
+              ) : null}
+            </Stack>
+          </Stack>
+        </Tooltip>
+      );
+    },
   },
   {
     // Column for showing total amount of the order.

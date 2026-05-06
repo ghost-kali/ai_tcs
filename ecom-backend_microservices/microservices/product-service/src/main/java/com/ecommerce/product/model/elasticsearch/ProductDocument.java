@@ -70,10 +70,10 @@ public class ProductDocument {
     private Boolean featured;
     
     @Field(type = FieldType.Date)
-    private LocalDateTime createdAt;
+    private String createdAt;
     
     @Field(type = FieldType.Date)
-    private LocalDateTime updatedAt;
+    private String updatedAt;
     
     // Computed fields for search
     @Field(type = FieldType.Double)

@@ -420,19 +420,42 @@ export const analyticsAction = () => async (dispatch, getState) => {
 };
 
 export const getOrdersForDashboard =
-  (queryString, isAdmin) => async (dispatch) => {
+  (queryString, isAdmin) => async (dispatch, getState) => {
     try {
       dispatch({ type: "IS_FETCHING" });
-      const endpoint = isAdmin ? "/orders" : "/seller/orders";
-      const { data } = await api.get(`${endpoint}?${queryString}`);
+
+      const state = getState();
+      const resolvedIsAdmin =
+        typeof isAdmin === "boolean"
+          ? isAdmin
+          : Boolean(state?.auth?.user?.roles?.includes("ROLE_ADMIN"));
+
+      let resolvedQueryString = queryString;
+      if (!resolvedQueryString) {
+        const pageNumber = state?.order?.pagination?.pageNumber ?? 0;
+        const pageSize = state?.order?.pagination?.pageSize ?? 10;
+        const params = new URLSearchParams();
+        params.set("pageNumber", pageNumber);
+        params.set("pageSize", pageSize);
+        resolvedQueryString = params.toString();
+      }
+
+      const endpoint = resolvedIsAdmin ? "/orders" : "/seller/orders";
+      const { data } = await api.get(`${endpoint}?${resolvedQueryString}`);
+
+      // Spring `Page<T>` compatibility: support both custom and default field names.
+      const pageNumber = data.pageNumber ?? data.number ?? data.pageable?.pageNumber ?? 0;
+      const pageSize = data.pageSize ?? data.size ?? data.pageable?.pageSize ?? 10;
+      const lastPage = data.lastPage ?? data.last ?? false;
+
       dispatch({
         type: "GET_ADMIN_ORDERS",
         payload: data.content,
-        pageNumber: data.pageNumber,
-        pageSize: data.pageSize,
+        pageNumber,
+        pageSize,
         totalElements: data.totalElements,
         totalPages: data.totalPages,
-        lastPage: data.lastPage,
+        lastPage,
       });
       dispatch({ type: "IS_SUCCESS" });
     } catch (error) {

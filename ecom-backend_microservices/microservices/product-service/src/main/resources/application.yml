@@ -38,7 +38,7 @@ app:
 storage:
   provider: ${IMAGE_STORAGE_PROVIDER:azure} # azure only
   azure:
-    connection-string: ${AZURE_STORAGE_CONNECTION_STRING}
+    connection-string: ${AZURE_STORAGE_CONNECTION_STRING:}
     container: ${AZURE_STORAGE_CONTAINER:}
     account-name: ${AZURE_STORAGE_ACCOUNT:}
     public-base-url: ${AZURE_PUBLIC_BASE_URL:}

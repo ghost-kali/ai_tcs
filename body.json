@@ -1,0 +1,1 @@
+﻿{"query":{"bool":{"filter":[{"bool":{"should":[{"term":{"active":true}},{"bool":{"must_not":[{"exists":{"field":"active"}}]}}],"minimum_should_match":1}}],"must":[{"multi_match":{"query":"iphone","fields":["productName","description","brand","categoryName"],"type":"best_fields"}}]}}}

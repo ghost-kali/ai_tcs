@@ -22,6 +22,7 @@ const tableRecords = adminOrder?.map((item) => {
   return {
     id: item.orderId,
     email: item.email,
+    orderItems: item.orderItems || [],
     totalAmount: item.totalAmount,
     status: item.orderStatus,
     date: item.orderDate,
@@ -53,6 +54,19 @@ const handleEdit = (order) => {
             columns={adminOrderTableColumn(handleEdit)}
             paginationMode='server'
             rowCount={pagination?.totalElements || 0}
+            getRowHeight={() => "auto"}
+            sx={{
+              "& .MuiDataGrid-cell": {
+                whiteSpace: "normal",
+                lineHeight: 1.4,
+                py: 1,
+                alignItems: "flex-start",
+              },
+              "& .MuiDataGrid-columnHeader": {
+                whiteSpace: "normal",
+                lineHeight: 1.2,
+              },
+            }}
             initialState={{
               pagination: {
                 paginationModel: {

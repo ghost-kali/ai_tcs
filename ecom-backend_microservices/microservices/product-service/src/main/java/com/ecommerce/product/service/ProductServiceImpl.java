@@ -2,6 +2,7 @@ package com.ecommerce.product.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ecommerce.product.dto.ProductDTO;
+import com.ecommerce.product.dto.SearchCriteria;
 import com.ecommerce.product.exception.ResourceNotFoundException;
 import com.ecommerce.product.model.Category;
 import com.ecommerce.product.model.Product;
@@ -159,12 +161,15 @@ public class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    @Cacheable(value = "productSearch", key = "#keyword + '-' + #categoryId + '-' + #pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<ProductDTO> searchProducts(String keyword, Long categoryId, Pageable pageable) {
         log.info("Searching products with keyword: {} categoryId: {}", keyword, categoryId);
 
-        Page<Product> products = productRepository.searchByKeyword(keyword, categoryId, pageable);
-        return products.map(this::convertToDTO);
+        SearchCriteria criteria = SearchCriteria.builder()
+                .query(keyword)
+                .categoryIds(categoryId == null ? Collections.emptyList() : List.of(categoryId))
+                .build();
+
+        return productSearchService.advancedSearch(criteria, pageable);
     }
     
     @Override
@@ -448,8 +453,8 @@ public class ProductServiceImpl implements ProductService {
             .reviewCount(product.getReviewCount())
             .active(product.getActive())
             .featured(false)  // Set default as featured field doesn't exist in Product
-            .createdAt(product.getCreatedAt())
-            .updatedAt(product.getUpdatedAt())
+            .createdAt(product.getCreatedAt() == null ? null : product.getCreatedAt().toString())
+            .updatedAt(product.getUpdatedAt() == null ? null : product.getUpdatedAt().toString())
             .inStock(product.getQuantity() > 0)
             .build();
         

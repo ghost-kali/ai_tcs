@@ -1,5 +1,7 @@
 package com.ecommerce.product.config;
 
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +16,18 @@ import java.util.stream.Collectors;
 @Configuration
 @ConditionalOnProperty(name = "app.elasticsearch.enabled", havingValue = "true", matchIfMissing = true)
 @EnableElasticsearchRepositories(basePackages = "com.ecommerce.product.repository.elasticsearch")
+@Slf4j
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
     
     // Prefer Spring Boot's `spring.elasticsearch.uris` but allow older `spring.data.elasticsearch.cluster-nodes` too.
     // Accept values like "http://localhost:9200" and normalize to "localhost:9200".
     @Value("${spring.elasticsearch.uris:${spring.data.elasticsearch.cluster-nodes:localhost:9200}}")
     private String uris;
+
+    @PostConstruct
+    void logElasticsearchUris() {
+        log.info("Elasticsearch uris='{}' (from spring.elasticsearch.uris)", uris);
+    }
     
     @Override
     public ClientConfiguration clientConfiguration() {
@@ -29,6 +37,7 @@ public class ElasticsearchConfig extends ElasticsearchConfiguration {
                 .map(this::stripScheme)
                 .collect(Collectors.toList());
 
+        log.info("Elasticsearch connectedTo={}", hosts);
         return ClientConfiguration.builder()
                 .connectedTo(hosts.toArray(String[]::new))
                 .build();

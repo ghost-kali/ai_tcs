@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -107,7 +108,9 @@ public class ProductController {
         
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductDTO> products = productService.searchProducts(keyword, categoryId, pageable);
-        return ResponseEntity.ok(products);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Product-Search-Backend", "elasticsearch-nativequery-v1");
+        return ResponseEntity.ok().headers(headers).body(products);
     }
     
     @GetMapping("/seller/{sellerId}")
