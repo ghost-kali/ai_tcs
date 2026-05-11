@@ -1,0 +1,450 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/vb5ewc",
+    "id": "vb5ewc",
+    "slide": 1,
+    "layoutId": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        12
+      ],
+      "geometry": "rect",
+      "fillColor": "#00A3A3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "3",
+      "bbox": [
+        0,
+        12,
+        1280,
+        74
+      ],
+      "geometry": "rect",
+      "fillColor": "#0B2E4A",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "4",
+      "bbox": [
+        72,
+        30,
+        1136,
+        44
+      ],
+      "geometry": "rect",
+      "text": "E‑commerce Microservices Platform",
+      "textPreview": "E‑commerce Microservices Platform",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "E‑commerce Microservices Platform"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "E‑commerce Microservices Platform",
+          "runs": [
+            {
+              "index": 1,
+              "text": "E‑commerce Microservices Platform",
+              "fontSize": 34,
+              "typeface": "Aptos Display",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "5",
+      "bbox": [
+        72,
+        140,
+        720,
+        120
+      ],
+      "geometry": "rect",
+      "text": "Spring Boot • Spring Cloud • API Gateway • JWT • Redis • PostgreSQL",
+      "textPreview": "Spring Boot • Spring Cloud • API Gateway • JWT • Redis • PostgreSQL",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Spring Boot • Spring Cloud • API Gateway • JWT • Redis • PostgreSQL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Spring Boot • Spring Cloud • API Gateway • JWT • Redis • PostgreSQL",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Spring Boot • Spring Cloud • API Gateway • JWT • Redis • PostgreSQL",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "6",
+      "bbox": [
+        72,
+        260,
+        1136,
+        320
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "7",
+      "bbox": [
+        96,
+        288,
+        1088,
+        46
+      ],
+      "geometry": "rect",
+      "text": "What this deck covers",
+      "textPreview": "What this deck covers",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "What this deck covers"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "What this deck covers",
+          "runs": [
+            {
+              "index": 1,
+              "text": "What this deck covers",
+              "fontSize": 22,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jm1cfa9w",
+      "id": "8",
+      "bbox": [
+        104,
+        344,
+        1060,
+        220
+      ],
+      "geometry": "rect",
+      "text": "• Project overview and business goal\n• System architecture (frontend → gateway → microservices)\n• Key features delivered (auth, catalog, cart/order, payment)\n• Security approach and learnings\n• Next steps for production hardening",
+      "textPreview": "• Project overview and business goal | • System architecture (frontend → gateway → microservices) | • Key features delivered (auth, catal...",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Project overview and business goal"
+          },
+          {
+            "index": 2,
+            "text": "• System architecture (frontend → gateway → microservices)"
+          },
+          {
+            "index": 3,
+            "text": "• Key features delivered (auth, catalog, cart/order, payment)"
+          },
+          {
+            "index": 4,
+            "text": "• Security approach and learnings"
+          },
+          {
+            "index": 5,
+            "text": "• Next steps for production hardening"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Project overview and business goal",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Project overview and business goal",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#0F172A"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• System architecture (frontend → gateway → microservices)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• System architecture (frontend → gateway → microservices)",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#0F172A"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Key features delivered (auth, catalog, cart/order, payment)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Key features delivered (auth, catalog, cart/order, payment)",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#0F172A"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• Security approach and learnings",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Security approach and learnings",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#0F172A"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "• Next steps for production hardening",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Next steps for production hardening",
+              "fontSize": 18,
+              "typeface": "Aptos",
+              "color": "#0F172A"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u18jqh0f",
+      "id": "9",
+      "bbox": [
+        72,
+        676,
+        1136,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Prepared for TCS Delivery Leadership • 10 May 2026",
+      "textPreview": "Prepared for TCS Delivery Leadership • 10 May 2026",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "Aptos",
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Prepared for TCS Delivery Leadership • 10 May 2026"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Prepared for TCS Delivery Leadership • 10 May 2026",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Prepared for TCS Delivery Leadership • 10 May 2026",
+              "fontSize": 12,
+              "typeface": "Aptos",
+              "color": "#94A3B8"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

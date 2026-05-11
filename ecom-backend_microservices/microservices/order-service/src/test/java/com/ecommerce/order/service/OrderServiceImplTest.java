@@ -25,9 +25,6 @@ class OrderServiceImplTest {
     @Mock
     private CustomerOrderRepository customerOrderRepository;
 
-    @Mock
-    private AddressService addressService;
-
     @InjectMocks
     private OrderServiceImpl service;
 

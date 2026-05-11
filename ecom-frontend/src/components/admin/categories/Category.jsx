@@ -1,58 +1,51 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { FaFolderOpen, FaThList } from "react-icons/fa";
 import toast from "react-hot-toast";
 
-import Modal from "../../shared/Modal";
+import { Modal } from "../../../ui";
 import AddCategoryForm from "./AddCategoryForm";
-import Loader from "../../shared/Loader";
-import { DeleteModal } from "../../../components/shared/DeleteModal";
-import useCategoryFilter from "../../../hooks/useCategoryFilter";
+import { Loader } from "../../../ui";
+import { DeleteModal } from "../../../ui";
 import ErrorPage from "../../shared/ErrorPage";
+import { getCategoriesPageForDashboard } from "../../../store/actions";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { deleteCategoryDashboardAction } from "../../../store/actions";
 
 const Category = () => {
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const pathname = useLocation().pathname;
   const params = new URLSearchParams(searchParams);
+  const pathname = useLocation().pathname;
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const { categoryLoader, errorMessage } = useSelector((state) => state.errors);
-  const { categories } = useSelector((state) => state.products);
-
-  useCategoryFilter();
-
-  // ✅ FILTER ONLY ROOT CATEGORIES (avoid duplicate children)
-  const rootCategories = categories?.filter(
-    (cat) => cat.parentId === null
+  const { categories, pagination } = useSelector((state) => state.products);
+  const [currentPage, setCurrentPage] = useState(
+    pagination?.pageNumber + 1 || 1,
   );
 
-  // ✅ BUILD TREE STRUCTURE
-  const tableRecords = [];
+  React.useEffect(() => {
+    const qp = new URLSearchParams();
+    const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+    setCurrentPage(page);
+    qp.set("pageNumber", page - 1);
+    qp.set("pageSize", 5);
+    dispatch(getCategoriesPageForDashboard(qp.toString()));
+  }, [dispatch, searchParams]);
 
-  rootCategories?.forEach((parent) => {
-    tableRecords.push({
-      id: parent.categoryId,
-      categoryName: parent.categoryName,
-      isChild: false,
-    });
-
-    parent.children?.forEach((child) => {
-      tableRecords.push({
-        id: child.categoryId,
-        categoryName: "↳ " + child.categoryName,
-        isChild: true,
-      });
-    });
-  });
+  const tableRecords = (categories ?? []).map((cat) => ({
+    id: cat.categoryId,
+    categoryName: cat.categoryName,
+    parentName: cat.parentName ?? "-",
+    active: cat.active,
+  }));
 
   const handleEdit = (category) => {
     setOpenUpdateModal(true);
@@ -69,47 +62,35 @@ const Category = () => {
       deleteCategoryDashboardAction(
         setOpenDeleteModal,
         selectedCategory?.id,
-        toast
-      )
+        toast,
+      ),
     );
   };
 
   const columns = [
-    {
-      field: "id",
-      headerName: "Category ID",
-      width: 150,
-    },
+    { field: "id", headerName: "Category ID", width: 160 },
     {
       field: "categoryName",
       headerName: "Category Name",
       flex: 1,
-      renderCell: (params) => (
-        <span
-          style={{
-            paddingLeft: params.row.isChild ? "20px" : "0px",
-            fontWeight: params.row.isChild ? "normal" : "bold",
-          }}
-        >
-          {params.value}
-        </span>
-      ),
     },
+  ,
     {
       field: "actions",
       headerName: "Action",
-      width: 250,
+      width: 240,
+      sortable: false,
       renderCell: (params) => (
         <div className="flex gap-2">
           <button
             onClick={() => handleEdit(params.row)}
-            className="bg-blue-500 text-white px-3 py-1 rounded"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
           >
             Edit
           </button>
           <button
             onClick={() => handleDelete(params.row)}
-            className="bg-red-500 text-white px-3 py-1 rounded"
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
           >
             Delete
           </button>
@@ -119,7 +100,6 @@ const Category = () => {
   ];
 
   const emptyCategories = !categories || categories?.length === 0;
-
   if (errorMessage) return <ErrorPage message={errorMessage} />;
 
   return (
@@ -152,23 +132,33 @@ const Category = () => {
               </h2>
             </div>
           ) : (
-            <div className="max-w-fit mx-auto">
-              <DataGrid
-                rows={tableRecords}
-                columns={columns}
-                paginationMode="client"   // ✅ frontend pagination
-                pageSizeOptions={[2, 5, 10]}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 2,
-                      page: 0,
+            <div className="w-full overflow-x-auto">
+              <div className="min-w-[700px]">
+                <DataGrid
+                  rows={tableRecords}
+                  columns={columns}
+                  paginationMode="server"
+                  rowCount={pagination?.totalElements || 0}
+                  pageSizeOptions={[pagination?.pageSize || 10]}
+                  initialState={{
+                    pagination: {
+                      paginationModel: {
+                        pageSize: pagination?.pageSize || 10,
+                        page: currentPage - 1,
+                      },
                     },
-                  },
-                }}
-                disableRowSelectionOnClick
-                pagination
-              />
+                  }}
+                  onPaginationModelChange={(paginationModel) => {
+                    const page = paginationModel.page + 1;
+                    setCurrentPage(page);
+                    params.set("page", page.toString());
+                    navigate(`${pathname}?${params}`);
+                  }}
+                  disableRowSelectionOnClick
+                  disableColumnResize
+                  pagination
+                />
+              </div>
             </div>
           )}
         </>

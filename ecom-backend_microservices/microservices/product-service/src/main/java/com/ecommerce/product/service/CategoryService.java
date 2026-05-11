@@ -1,6 +1,7 @@
 package com.ecommerce.product.service;
 
 import com.ecommerce.product.dto.CategoryDTO;
+import com.ecommerce.product.dto.PageResponse;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 
@@ -17,6 +18,8 @@ public interface CategoryService {
 
     @Cacheable(value = "categories", key = "'page_' + #pageNumber + '_' + #pageSize")
     List<CategoryDTO> getAllCategories();
+
+    PageResponse<CategoryDTO> getCategoriesPage(int pageNumber, int pageSize);
 
     List<CategoryDTO> getActiveCategories();
     

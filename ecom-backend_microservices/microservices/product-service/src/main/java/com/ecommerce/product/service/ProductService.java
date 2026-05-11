@@ -21,32 +21,16 @@ public interface ProductService {
     Page<ProductDTO> getProductsByCategory(Long categoryId, Pageable pageable);
     
     Page<ProductDTO> searchProducts(String keyword, Long categoryId, Pageable pageable);
-    
-    Page<ProductDTO> getProductsBySeller(Long sellerId, Pageable pageable);
-    
-    Page<ProductDTO> getProductsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
-    
-    Page<ProductDTO> getProductsByBrand(String brand, Pageable pageable);
-    
-    Page<ProductDTO> getDiscountedProducts(Pageable pageable);
-    
-    List<ProductDTO> getNewArrivals();
-    
-    List<ProductDTO> getTopRatedProducts();
-    
-    List<String> getAllBrands();
+
     
     void deleteProduct(Long productId);
     
     ProductDTO updateProductImage(Long productId, MultipartFile image);
+
     
-    boolean updateStock(Long productId, Integer quantity, boolean increase);
+
     
-    List<ProductDTO> getLowStockProducts(Integer threshold);
+
     
-    void activateProduct(Long productId);
-    
-    void deactivateProduct(Long productId);
-    
-    ProductDTO getProductBySku(String sku);
+
 } 

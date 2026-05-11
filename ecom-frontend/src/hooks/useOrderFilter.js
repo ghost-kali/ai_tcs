@@ -18,6 +18,7 @@ const useOrderFilter = () => {
             : 1;
 
         params.set("pageNumber", currentPage - 1);
+        params.set("pageSize", 10);
 
         const queryString = params.toString();
         console.log("QUERY STRING", queryString);

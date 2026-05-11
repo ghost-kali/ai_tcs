@@ -1,5 +1,4 @@
 package com.ecommerce.order.service;
-
 import com.ecommerce.order.dto.MessageResponse;
 import com.ecommerce.order.dto.OrderItemResponse;
 import com.ecommerce.order.dto.OrderRequest;
@@ -29,7 +28,7 @@ import java.time.LocalDateTime;
 public class OrderServiceImpl implements OrderService {
 
     private final CustomerOrderRepository customerOrderRepository;
-    private final AddressService addressService;
+
 
     @Override
     @Transactional
@@ -42,8 +41,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderDate(LocalDateTime.now());
 
         if (request.getAddressId() != null) {
-            Address address = addressService.getAddressEntity(userId, request.getAddressId());
-            order.setAddress(address);
+
         }
 
         request.getItems().forEach(itemRequest -> {

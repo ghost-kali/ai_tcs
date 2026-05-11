@@ -1,6 +1,7 @@
 package com.ecommerce.product.service;
 
 import com.ecommerce.product.dto.CategoryDTO;
+import com.ecommerce.product.dto.PageResponse;
 import com.ecommerce.product.exception.ResourceNotFoundException;
 import com.ecommerce.product.model.Category;
 import com.ecommerce.product.repository.jpa.CategoryRepository;
@@ -13,10 +14,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+
     
     @Override
     @CacheEvict(value = "categories", allEntries = true)
@@ -46,9 +45,6 @@ public class CategoryServiceImpl implements CategoryService {
         }
         
         Category savedCategory = categoryRepository.save(category);
-        
-        // Publish category created event
-        publishCategoryEvent("CATEGORY_CREATED", savedCategory);
         
         return convertToDTO(savedCategory);
     }
@@ -85,9 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         
         Category updatedCategory = categoryRepository.save(existingCategory);
-        
-        // Publish category updated event
-        publishCategoryEvent("CATEGORY_UPDATED", updatedCategory);
+
         
         return convertToDTO(updatedCategory);
     }
@@ -112,6 +106,33 @@ public class CategoryServiceImpl implements CategoryService {
         return categories.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public PageResponse<CategoryDTO> getCategoriesPage(int pageNumber, int pageSize) {
+        int safePageNumber = Math.max(0, pageNumber);
+        int safePageSize = Math.max(1, pageSize);
+
+        Page<Category> page = categoryRepository.findAll(
+                PageRequest.of(
+                        safePageNumber,
+                        safePageSize,
+                        Sort.by(Sort.Direction.ASC, "displayOrder").and(Sort.by(Sort.Direction.ASC, "categoryId"))
+                )
+        );
+
+        List<CategoryDTO> content = page.getContent().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        return PageResponse.<CategoryDTO>builder()
+                .content(content)
+                .pageNumber(page.getNumber())
+                .pageSize(page.getSize())
+                .totalElements(page.getTotalElements())
+                .totalPages(page.getTotalPages())
+                .lastPage(page.isLast())
+                .build();
     }
     
     @Override
@@ -166,12 +187,10 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalStateException("Cannot delete category with child categories");
         }
         
-        // Soft delete
+
 
         categoryRepository.delete(category);
-        
-        // Publish category deleted event
-        publishCategoryEvent("CATEGORY_DELETED", category);
+
     }
     
     @Override
@@ -184,8 +203,7 @@ public class CategoryServiceImpl implements CategoryService {
         
         category.setActive(true);
         categoryRepository.save(category);
-        
-        publishCategoryEvent("CATEGORY_ACTIVATED", category);
+
     }
     
     @Override
@@ -198,8 +216,7 @@ public class CategoryServiceImpl implements CategoryService {
         
         category.setActive(false);
         categoryRepository.save(category);
-        
-        publishCategoryEvent("CATEGORY_DEACTIVATED", category);
+
     }
     
     @Override
@@ -230,23 +247,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         return dto;
     }
+
     
-    private void publishCategoryEvent(String eventType, Category category) {
-        try {
-            CategoryEvent event = new CategoryEvent(eventType, category.getCategoryId(), convertToDTO(category));
-            kafkaTemplate.send("product-events", event);
-            log.info("Published {} event for category: {}", eventType, category.getCategoryId());
-        } catch (Exception e) {
-            log.error("Failed to publish category event", e);
-        }
-    }
-    
-    // Event class
-    @lombok.Data
-    @lombok.AllArgsConstructor
-    public static class CategoryEvent {
-        private String eventType;
-        private Long categoryId;
-        private CategoryDTO category;
-    }
+
 } 

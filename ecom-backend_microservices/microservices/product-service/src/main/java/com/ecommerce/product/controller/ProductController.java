@@ -74,7 +74,7 @@ public class ProductController {
     @Operation(summary = "Get all products with pagination")
     public ResponseEntity<Page<ProductDTO>> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "productId") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDirection) {
         
@@ -113,74 +113,13 @@ public class ProductController {
         return ResponseEntity.ok().headers(headers).body(products);
     }
     
-    @GetMapping("/seller/{sellerId}")
-    @Operation(summary = "Get products by seller")
-    public ResponseEntity<Page<ProductDTO>> getProductsBySeller(
-            @PathVariable Long sellerId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDTO> products = productService.getProductsBySeller(sellerId, pageable);
-        return ResponseEntity.ok(products);
-    }
+
+
     
-    @GetMapping("/price-range")
-    @Operation(summary = "Get products within price range")
-    public ResponseEntity<Page<ProductDTO>> getProductsByPriceRange(
-            @RequestParam BigDecimal minPrice,
-            @RequestParam BigDecimal maxPrice,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDTO> products = productService.getProductsByPriceRange(minPrice, maxPrice, pageable);
-        return ResponseEntity.ok(products);
-    }
+
     
-    @GetMapping("/brand/{brand}")
-    @Operation(summary = "Get products by brand")
-    public ResponseEntity<Page<ProductDTO>> getProductsByBrand(
-            @PathVariable String brand,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDTO> products = productService.getProductsByBrand(brand, pageable);
-        return ResponseEntity.ok(products);
-    }
-    
-    @GetMapping("/discounted")
-    @Operation(summary = "Get discounted products")
-    public ResponseEntity<Page<ProductDTO>> getDiscountedProducts(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ProductDTO> products = productService.getDiscountedProducts(pageable);
-        return ResponseEntity.ok(products);
-    }
-    
-    @GetMapping("/new-arrivals")
-    @Operation(summary = "Get new arrival products")
-    public ResponseEntity<List<ProductDTO>> getNewArrivals() {
-        List<ProductDTO> products = productService.getNewArrivals();
-        return ResponseEntity.ok(products);
-    }
-    
-    @GetMapping("/top-rated")
-    @Operation(summary = "Get top rated products")
-    public ResponseEntity<List<ProductDTO>> getTopRatedProducts() {
-        List<ProductDTO> products = productService.getTopRatedProducts();
-        return ResponseEntity.ok(products);
-    }
-    
-    @GetMapping("/brands")
-    @Operation(summary = "Get all available brands")
-    public ResponseEntity<List<String>> getAllBrands() {
-        List<String> brands = productService.getAllBrands();
-        return ResponseEntity.ok(brands);
-    }
+
+
     
     @DeleteMapping("/{productId}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -200,47 +139,9 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
     
-    @PutMapping("/{productId}/stock")
-    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
-    @Operation(summary = "Update product stock")
-    public ResponseEntity<Void> updateStock(
-            @PathVariable Long productId,
-            @RequestParam Integer quantity,
-            @RequestParam(defaultValue = "true") boolean increase) {
-        
-        boolean success = productService.updateStock(productId, quantity, increase);
-        return success ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
-    }
+
+
     
-    @GetMapping("/low-stock")
-    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
-    @Operation(summary = "Get low stock products")
-    public ResponseEntity<List<ProductDTO>> getLowStockProducts(
-            @RequestParam(defaultValue = "10") Integer threshold) {
-        List<ProductDTO> products = productService.getLowStockProducts(threshold);
-        return ResponseEntity.ok(products);
-    }
-    
-    @PutMapping("/{productId}/activate")
-    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
-    @Operation(summary = "Activate a product")
-    public ResponseEntity<Void> activateProduct(@PathVariable Long productId) {
-        productService.activateProduct(productId);
-        return ResponseEntity.ok().build();
-    }
-    
-    @PutMapping("/{productId}/deactivate")
-    @PreAuthorize("hasAnyRole('ADMIN', 'SELLER')")
-    @Operation(summary = "Deactivate a product")
-    public ResponseEntity<Void> deactivateProduct(@PathVariable Long productId) {
-        productService.deactivateProduct(productId);
-        return ResponseEntity.ok().build();
-    }
-    
-    @GetMapping("/sku/{sku}")
-    @Operation(summary = "Get product by SKU")
-    public ResponseEntity<ProductDTO> getProductBySku(@PathVariable String sku) {
-        ProductDTO product = productService.getProductBySku(sku);
-        return ResponseEntity.ok(product);
-    }
+
+
 } 

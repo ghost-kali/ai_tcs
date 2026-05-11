@@ -12,7 +12,6 @@ import com.ecommerce.auth.security.JwtUtils;
 import com.ecommerce.auth.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,7 +36,6 @@ public class AuthServiceImpl implements AuthService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
-    private final KafkaTemplate<String, Object> kafkaTemplate;
     private final RefreshTokenService refreshTokenService;
 
     @Override
@@ -65,11 +63,7 @@ public class AuthServiceImpl implements AuthService {
         // Update last login
         userRepository.updateLastLogin(userDetails.getId(), LocalDateTime.now());
         
-        // Publish login event
-        publishAuthEvent("USER_LOGIN", userDetails.getId(), Map.of(
-                "username", userDetails.getUsername(),
-                "timestamp", LocalDateTime.now()
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
 
         return new JwtResponse(
                 accessToken,
@@ -132,12 +126,7 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(roles);
         User savedUser = userRepository.save(user);
         
-        // Publish registration event
-        publishAuthEvent("USER_REGISTERED", savedUser.getUserId(), Map.of(
-                "username", savedUser.getUserName(),
-                "email", savedUser.getEmail(),
-                "roles", roles.stream().map(r -> r.getRoleName().name()).collect(Collectors.toList())
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
 
         return new MessageResponse("User registered successfully!");
     }
@@ -152,11 +141,7 @@ public class AuthServiceImpl implements AuthService {
         // Delete refresh token from database
         refreshTokenService.deleteByUserId(userId);
         
-        // Publish logout event
-        publishAuthEvent("USER_LOGOUT", userId, Map.of(
-                "username", userDetails.getUsername(),
-                "timestamp", LocalDateTime.now()
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
         
         SecurityContextHolder.clearContext();
         
@@ -233,10 +218,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
         
-        // Publish password change event
-        publishAuthEvent("PASSWORD_CHANGED", userId, Map.of(
-                "timestamp", LocalDateTime.now()
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
         
         return new MessageResponse("Password changed successfully!");
     }
@@ -249,12 +231,7 @@ public class AuthServiceImpl implements AuthService {
         // Generate reset token (simplified for now)
         String resetToken = UUID.randomUUID().toString();
         
-        // Publish password reset event
-        publishAuthEvent("PASSWORD_RESET_REQUESTED", user.getUserId(), Map.of(
-                "email", email,
-                "resetToken", resetToken,
-                "timestamp", LocalDateTime.now()
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
         
         return new MessageResponse("Password reset link sent to your email!");
     }
@@ -279,12 +256,7 @@ public class AuthServiceImpl implements AuthService {
         // Generate verification token
         String verificationToken = UUID.randomUUID().toString();
         
-        // Publish email verification event
-        publishAuthEvent("EMAIL_VERIFICATION_REQUESTED", user.getUserId(), Map.of(
-                "email", email,
-                "verificationToken", verificationToken,
-                "timestamp", LocalDateTime.now()
-        ));
+        // Auth events (Kafka removed): keep auth flow independent of messaging.
         
         return new MessageResponse("Verification email sent!");
     }
@@ -318,23 +290,5 @@ public class AuthServiceImpl implements AuthService {
         return dto;
     }
     
-    private void publishAuthEvent(String eventType, Long userId, Map<String, Object> details) {
-        try {
-            AuthEvent event = new AuthEvent(eventType, userId, details, LocalDateTime.now());
-            kafkaTemplate.send("auth-events", event);
-            log.info("Published {} event for user: {}", eventType, userId);
-        } catch (Exception e) {
-            log.error("Failed to publish auth event", e);
-        }
-    }
-    
-    // Event class
-    @lombok.Data
-    @lombok.AllArgsConstructor
-    public static class AuthEvent {
-        private String eventType;
-        private Long userId;
-        private Map<String, Object> details;
-        private LocalDateTime timestamp;
-    }
+    // Previously published Kafka auth events; removed from auth-service.
 } 

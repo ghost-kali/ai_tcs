@@ -1,6 +1,7 @@
 package com.ecommerce.product.controller;
 
 import com.ecommerce.product.dto.CategoryDTO;
+import com.ecommerce.product.dto.PageResponse;
 import com.ecommerce.product.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,6 +57,15 @@ public class CategoryController {
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
+    }
+
+    @GetMapping("/page")
+    @Operation(summary = "Get categories (paged)")
+    public ResponseEntity<PageResponse<CategoryDTO>> getCategoriesPage(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize
+    ) {
+        return ResponseEntity.ok(categoryService.getCategoriesPage(pageNumber, pageSize));
     }
     
     @GetMapping("/active")

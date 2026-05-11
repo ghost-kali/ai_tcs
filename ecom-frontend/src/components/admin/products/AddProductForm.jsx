@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import InputField from '../../shared/InputField';
+import { InputField } from '../../../ui';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewProductFromDashboard, fetchCategories, updateProductFromDashboard } from '../../../store/actions';
 import toast from 'react-hot-toast';
-import Spinners from '../../shared/Spinners';
-import SelectTextField from '../../shared/SelectTextField';
-import Skeleton from '../../shared/Skeleton';
+import { Spinners } from '../../../ui';
+import { SelectTextField } from '../../../ui';
+import { Skeleton } from '../../../ui';
 import ErrorPage from '../../shared/ErrorPage';
 
 const AddProductForm = ({ setOpen, product, update=false}) => {

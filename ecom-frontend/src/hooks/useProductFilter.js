@@ -16,7 +16,7 @@ const useProductFilter = () => {
             : 1;
 
         params.set("page", currentPage - 1); // ✅ backend expects "page"
-        params.set("size", 20);              // ✅ REQUIRED
+        params.set("size", 8);              // ✅ REQUIRED
 
         // ✅ FIXED SORT PARAMS
         const sortOrder = searchParams.get("sortby") || "asc";
@@ -61,7 +61,7 @@ export const useDashboardProductFilter = () => {
             : 1;
 
         params.set("page", currentPage - 1); // ✅ FIXED
-        params.set("size", 20);              // ✅ ADD
+       params.set("size", 8);             // ✅ ADD
 
         const queryString = params.toString();
 

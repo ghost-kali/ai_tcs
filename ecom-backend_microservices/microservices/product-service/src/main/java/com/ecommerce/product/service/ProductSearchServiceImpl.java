@@ -53,16 +53,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         productSearchRepository.save(product);
     }
 
-    @Override
-    public void indexProducts(List<ProductDocument> products) {
-        if (products == null || products.isEmpty()) {
-            return;
-        }
-        productSearchRepository.saveAll(products.stream()
-                .filter(Objects::nonNull)
-                .filter(p -> p.getProductId() != null)
-                .toList());
-    }
+
 
     @Override
     public void deleteProductFromIndex(Long productId) {
@@ -88,13 +79,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         }
     }
 
-    @Override
-    public Page<ProductDTO> searchProducts(String query, Pageable pageable) {
-        SearchCriteria criteria = SearchCriteria.builder()
-                .query(query)
-                .build();
-        return advancedSearch(criteria, pageable);
-    }
+
 
     @Override
     public Page<ProductDTO> advancedSearch(SearchCriteria criteria, Pageable pageable) {
@@ -154,42 +139,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         }
     }
 
-    @Override
-    public Page<ProductDTO> searchByCategory(Long categoryId, Pageable pageable) {
-        SearchCriteria criteria = SearchCriteria.builder()
-                .categoryIds(categoryId == null ? Collections.emptyList() : List.of(categoryId))
-                .build();
-        return advancedSearch(criteria, pageable);
-    }
 
-    @Override
-    public Page<ProductDTO> searchByBrand(String brand, Pageable pageable) {
-        SearchCriteria criteria = SearchCriteria.builder()
-                .brands(brand == null ? Collections.emptyList() : List.of(brand))
-                .build();
-        return advancedSearch(criteria, pageable);
-    }
-
-    @Override
-    public Page<ProductDTO> searchByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable) {
-        SearchCriteria criteria = SearchCriteria.builder()
-                .minPrice(minPrice)
-                .maxPrice(maxPrice)
-                .build();
-        return advancedSearch(criteria, pageable);
-    }
-
-    @Override
-    public Page<ProductDTO> findSimilarProducts(Long productId, Pageable pageable) {
-        // Not implemented yet.
-        return Page.empty(pageable);
-    }
-
-    @Override
-    public Map<String, List<ProductSearchService.FacetResult>> getFacets(String query) {
-        // Not implemented yet.
-        return new HashMap<>();
-    }
 
     @Override
     public List<String> getAutoCompleteSuggestions(String prefix) {
@@ -241,16 +191,6 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         }
     }
 
-    @Override
-    public List<String> getPopularSearchTerms() {
-        // Not implemented yet.
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void trackSearch(String query, Long userId) {
-        // Not implemented yet.
-    }
 
     private void addSuggestionIfMatches(Set<String> output, String candidate, String prefix, int limit) {
         if (output.size() >= limit) {

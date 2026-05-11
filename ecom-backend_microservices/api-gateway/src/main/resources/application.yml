@@ -32,7 +32,7 @@ spring:
         - id: category-public
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/api/public/categories/**
+            - Path=/api/categories/**
 
         - id: cart-service
           uri: lb://ORDER-SERVICE

@@ -2,6 +2,7 @@ package com.ecommerce.product.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,12 +15,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
 
 import com.ecommerce.product.dto.ProductDTO;
+import com.ecommerce.product.dto.SearchCriteria;
 import com.ecommerce.product.model.Category;
 import com.ecommerce.product.model.Product;
 import com.ecommerce.product.model.elasticsearch.ProductDocument;
@@ -38,31 +41,38 @@ class ProductSearchServiceImplTest {
     @Mock
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    @Mock
-    private org.modelmapper.ModelMapper modelMapper;
-
     @InjectMocks
     private ProductSearchServiceImpl service;
 
     @Test
-    void searchProducts_whenQueryBlank_usesActiveSearchRepository() {
+    void advancedSearch_whenQueryBlank_returnsActiveProducts() {
         // Given
         Pageable pageable = PageRequest.of(0, 10);
-        ProductDocument doc = ProductDocument.builder().productId(1L).productName("Phone").active(true).build();
-        when(productSearchRepository.findByActiveTrue(pageable)).thenReturn(new PageImpl<>(List.of(doc)));
+        SearchCriteria criteria = SearchCriteria.builder().query("   ").build();
 
-        ProductDTO dto = new ProductDTO();
-        dto.setProductId(1L);
-        dto.setProductName("Phone");
-        when(modelMapper.map(doc, ProductDTO.class)).thenReturn(dto);
+        ProductDocument doc = ProductDocument.builder()
+                .productId(1L)
+                .productName("Phone")
+                .active(true)
+                .build();
+
+        @SuppressWarnings("unchecked")
+        SearchHit<ProductDocument> hit = (SearchHit<ProductDocument>) org.mockito.Mockito.mock(SearchHit.class);
+        when(hit.getContent()).thenReturn(doc);
+
+        @SuppressWarnings("unchecked")
+        SearchHits<ProductDocument> hits = (SearchHits<ProductDocument>) org.mockito.Mockito.mock(SearchHits.class);
+        when(hits.getSearchHits()).thenReturn(List.of(hit));
+
+        when(elasticsearchTemplate.search(any(org.springframework.data.elasticsearch.client.elc.NativeQuery.class), eq(ProductDocument.class)))
+                .thenReturn(hits);
 
         // When
-        Page<ProductDTO> result = service.searchProducts("   ", pageable);
+        Page<ProductDTO> result = service.advancedSearch(criteria, pageable);
 
         // Then
         assertThat(result.getTotalElements()).isEqualTo(1);
         assertThat(result.getContent().get(0).getProductId()).isEqualTo(1L);
-        verify(productSearchRepository).findByActiveTrue(pageable);
     }
 
     @Test
@@ -79,7 +89,7 @@ class ProductSearchServiceImplTest {
         category.setCategoryName("Electronics");
         product.setCategory(category);
 
-        when(productRepository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(List.of(product)));
+        when(productRepository.findAll()).thenReturn(List.of(product));
 
         // When
         service.reindexAllProducts();

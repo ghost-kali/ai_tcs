@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { fetchCategories } from "../../store/actions";
 import Filter from "./Filter";
 import useProductFilter from "../../hooks/useProductFilter";
-import Loader from "../shared/Loader";
+import { Loader } from "../../ui";
 import Paginations from "../shared/Paginations";
 
 const Products = () => {

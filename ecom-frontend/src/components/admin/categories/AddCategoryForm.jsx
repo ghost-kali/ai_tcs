@@ -7,7 +7,7 @@ import {
   createCategoryDashboardAction,
   updateCategoryDashboardAction,
 } from "../../../store/actions";
-import InputField from "../../shared/InputField";
+import { InputField } from "../../../ui";
 
 const AddCategoryForm = ({ setOpen, open, category, update = false }) => {
   const dispatch = useDispatch();

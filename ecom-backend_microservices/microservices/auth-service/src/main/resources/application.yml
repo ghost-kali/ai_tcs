@@ -23,12 +23,6 @@ spring:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
 
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer  # ✅ FIXED
-
 jwt:
   secret: ${JWT_SECRET:mySuperSecretKeyForJwtAuthenticationWhichIsAtLeast32BytesLong12345}
   expiration-ms: ${JWT_EXPIRATION_MS:86400000}

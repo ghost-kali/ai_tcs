@@ -12,8 +12,7 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     Optional<Category> findByCategoryName(String categoryName);
-    
-    List<Category> findByActiveTrue();
+
     
     List<Category> findByActiveTrueOrderByDisplayOrderAsc();
     
@@ -21,8 +20,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     List<Category> findByParentCategoryIdAndActiveTrue(Long parentId);
     
-    @Query("SELECT c FROM Category c LEFT JOIN FETCH c.children WHERE c.parent IS NULL AND c.active = true ORDER BY c.displayOrder")
-    List<Category> findAllRootCategoriesWithChildren();
+
     
     boolean existsByCategoryNameAndCategoryIdNot(String categoryName, Long categoryId);
 } 

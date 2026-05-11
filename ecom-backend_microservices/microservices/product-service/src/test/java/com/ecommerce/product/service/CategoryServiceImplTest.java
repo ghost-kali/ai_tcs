@@ -3,7 +3,6 @@ package com.ecommerce.product.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,8 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import com.ecommerce.product.dto.CategoryDTO;
 import com.ecommerce.product.exception.ResourceNotFoundException;
@@ -35,9 +32,6 @@ class CategoryServiceImplTest {
 
     @Mock
     private org.modelmapper.ModelMapper modelMapper;
-
-    @Mock
-    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @InjectMocks
     private CategoryServiceImpl categoryService;
@@ -118,7 +112,6 @@ class CategoryServiceImplTest {
 
         // Then
         assertThat(result.getCategoryId()).isEqualTo(10L);
-        verify(kafkaTemplate).send(eq("product-events"), any());
     }
 
     @Test

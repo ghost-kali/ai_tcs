@@ -27,8 +27,17 @@ public class OrderController {
     }
 
     @GetMapping("/api/orders")
-    public ResponseEntity<PageResponse<OrderResponse>> getOrders(@RequestParam(defaultValue = "0") int pageNumber) {
-        return ResponseEntity.ok(orderService.getOrdersForAdmin(pageNumber, 10));
+    public ResponseEntity<PageResponse<OrderResponse>> getOrders(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize
+    ) {
+
+        return ResponseEntity.ok(
+                orderService.getOrdersForAdmin(
+                        pageNumber,
+                        pageSize
+                )
+        );
     }
 
     @GetMapping("/api/orders/my")

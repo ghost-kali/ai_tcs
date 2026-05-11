@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import Spinners from '../../shared/Spinners';
+import { Spinners } from '../../../ui';
 import { Button } from '@mui/material';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';

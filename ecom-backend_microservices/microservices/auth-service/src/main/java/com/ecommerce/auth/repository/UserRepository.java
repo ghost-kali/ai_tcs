@@ -1,6 +1,9 @@
 package com.ecommerce.auth.repository;
 
 import com.ecommerce.auth.model.User;
+import com.ecommerce.auth.model.AppRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.email = :email")
     Optional<User> findByEmailWithRoles(@Param("email") String email);
+
+    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.roleName = :roleName")
+    Page<User> findByRole(@Param("roleName") AppRole roleName, Pageable pageable);
 } 

@@ -4,7 +4,7 @@ import { FaBoxOpen, FaDollarSign, FaShoppingCart } from 'react-icons/fa';
 import { MdAttachMoney } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { analyticsAction } from '../../../store/actions';
-import Loader from '../../shared/Loader';
+import { Loader } from '../../../ui';
 import ErrorPage from '../../shared/ErrorPage';
 
 const Dashboard = () => {

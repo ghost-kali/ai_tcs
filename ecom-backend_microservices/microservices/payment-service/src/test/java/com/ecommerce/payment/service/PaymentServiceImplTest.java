@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.ecommerce.payment.config.PayPalProperties;
 import com.ecommerce.payment.dto.PayPalOrderRequest;
 import com.ecommerce.payment.dto.PayPalOrderResponse;
+import com.ecommerce.payment.repository.PaymentTransactionRepository;
 import com.paypal.core.PayPalHttpClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.exceptions.HttpException;
@@ -34,6 +35,9 @@ class PaymentServiceImplTest {
 
     @Mock
     private PayPalProperties properties;
+
+    @Mock
+    private PaymentTransactionRepository paymentTransactionRepository;
 
     @InjectMocks
     private PaymentServiceImpl service;
@@ -61,6 +65,8 @@ class PaymentServiceImplTest {
         when(response.result()).thenReturn(order);
 
         when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCreateRequest.class))).thenReturn(response);
+        when(paymentTransactionRepository.findByProviderOrderId("ORDER-1")).thenReturn(java.util.Optional.empty());
+        when(paymentTransactionRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
 
         PayPalOrderRequest request = new PayPalOrderRequest();
         request.setAmount(new BigDecimal("12.34"));
@@ -104,9 +110,11 @@ class PaymentServiceImplTest {
         when(response.result()).thenReturn(order);
 
         when(payPalHttpClient.execute(any(com.paypal.orders.OrdersCaptureRequest.class))).thenReturn(response);
+        when(paymentTransactionRepository.findByProviderOrderId("ORDER-2")).thenReturn(java.util.Optional.empty());
+        when(paymentTransactionRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
 
         // When
-        PayPalOrderResponse result = service.capturePayPalOrder("PAYPAL-ORDER-ID");
+        PayPalOrderResponse result = service.capturePayPalOrder("PAYPAL-ORDER-ID", null);
 
         // Then
         assertThat(result.getOrderId()).isEqualTo("ORDER-2");
@@ -123,7 +131,7 @@ class PaymentServiceImplTest {
 
         // When + Then
         ResponseStatusException thrown = assertThrows(ResponseStatusException.class,
-                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID"));
+                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID", null));
         assertThat(thrown.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -135,7 +143,7 @@ class PaymentServiceImplTest {
 
         // When + Then
         ResponseStatusException thrown = assertThrows(ResponseStatusException.class,
-                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID"));
+                () -> service.capturePayPalOrder("PAYPAL-ORDER-ID", null));
         assertThat(thrown.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
 }

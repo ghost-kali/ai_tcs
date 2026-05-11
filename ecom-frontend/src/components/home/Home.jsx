@@ -3,7 +3,7 @@ import HeroBanner from "./HeroBanner";
 import { useEffect } from "react";
 import { fetchProducts } from "../../store/actions";
 import ProductCard from "../shared/ProductCard";
-import Loader from "../shared/Loader";
+import { Loader } from "../../ui";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 const Home = () => {

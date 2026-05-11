@@ -2,7 +2,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { adminOrderTableColumn } from '../../helper/tableColumn';
 import { useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import Modal from '../../shared/Modal';
+import { Modal } from '../../../ui';
 import UpdateOrderForm from './UpdateOrderForm';
 
 const OrderTable = ({ adminOrder, pagination}) => {
@@ -47,9 +47,10 @@ const handleEdit = (order) => {
         All Orders
       </h1>
 
-      <div>
-         <DataGrid
-         className='w-full'
+      <div className="w-full overflow-x-auto">
+        <div className="min-w-[1100px]">
+          <DataGrid
+            className='w-full'
             rows={tableRecords}
             columns={adminOrderTableColumn(handleEdit)}
             paginationMode='server'
@@ -86,6 +87,7 @@ const handleEdit = (order) => {
               hideNextButton: currentPage === pagination?.totalPages,
             }}
           />
+        </div>
       </div>
 
       <Modal

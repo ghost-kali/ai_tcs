@@ -7,7 +7,7 @@ export const fetchProducts = (queryString) => async (dispatch) => {
     const keyword = qs.get("keyword");
     const categoryId = qs.get("categoryId");
     const page = Number(qs.get("page") ?? 0);
-    const size = Number(qs.get("size") ?? 20);
+   const size = Number(qs.get("size") ?? 8);
 
     let data;
     if (keyword && categoryId) {
@@ -22,13 +22,13 @@ export const fetchProducts = (queryString) => async (dispatch) => {
       const res = await api.get(`/products/category/${categoryId}?page=${page}&size=${size}`);
       data = res.data;
     } else {
-      const res = await api.get(`/products?${queryString}`);
-      data = res.data;
-    }
+  const res = await api.get(`/products?${queryString}`);
+  data = res.data;
+}
 
     // Spring `Page<T>` compatibility: support both custom and default field names.
     const pageNumber = data.pageNumber ?? data.number ?? data.pageable?.pageNumber ?? 0;
-    const pageSize = data.pageSize ?? data.size ?? data.pageable?.pageSize ?? 20;
+    const pageSize = data.pageSize ?? data.size ?? data.pageable?.pageSize ?? 8;
     const lastPage = data.lastPage ?? data.last ?? false;
 
     dispatch({
@@ -117,6 +117,7 @@ export const increaseCartQuantity =
       localStorage.setItem("cartItems", JSON.stringify(getState().carts.cart));
     } else {
       toast.error("Quantity Reached to Limit");
+      
     }
   };
 
@@ -228,56 +229,13 @@ export const addUpdateUserAddress =
     }
   };
 
-export const deleteUserAddress =
-  (toast, addressId, setOpenDeleteModal) => async (dispatch, getState) => {
-    try {
-      dispatch({ type: "BUTTON_LOADER" });
-      await api.delete(`/addresses/${addressId}`);
-      dispatch({ type: "IS_SUCCESS" });
-      dispatch(getUserAddresses());
-      dispatch(clearCheckoutAddress());
-      toast.success("Address deleted successfully");
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: "IS_ERROR",
-        payload: error?.response?.data?.message || "Some Error Occured",
-      });
-    } finally {
-      setOpenDeleteModal(false);
-    }
-  };
 
-export const clearCheckoutAddress = () => {
-  return {
-    type: "REMOVE_CHECKOUT_ADDRESS",
-  };
-};
 
-export const getUserAddresses = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: "IS_FETCHING" });
-    const { data } = await api.get(`/addresses`);
-    dispatch({ type: "USER_ADDRESS", payload: data });
-    dispatch({ type: "IS_SUCCESS" });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: "IS_ERROR",
-      payload:
-        error?.response?.data?.message || "Failed to fetch user addresses",
-    });
-  }
-};
 
-export const selectUserCheckoutAddress = (address) => {
-  localStorage.setItem("CHECKOUT_ADDRESS", JSON.stringify(address));
 
-  return {
-    type: "SELECT_CHECKOUT_ADDRESS",
-    payload: address,
-  };
-};
+
+
+
 
 export const addPaymentMethod = (method) => {
   return {
@@ -608,24 +566,33 @@ export const deleteProduct =
 export const updateProductImageFromDashboard =
   (formData, productId, toast, setLoader, setOpen, isAdmin) =>
   async (dispatch) => {
+    setLoader(true);
     try {
-      setLoader(true);
       const auth = JSON.parse(localStorage.getItem("auth"));
-      console.log(auth);
       const endpoint = isAdmin ? "/products/" : "/seller/products/";
+
       await api.post(`${endpoint}${productId}/image`, formData, {
         headers: {
           Authorization: `Bearer ${auth?.accessToken}`,
         },
       });
+
       toast.success("Image upload successful");
-      setLoader(false);
       setOpen(false);
-      await dispatch(dashboardProductsAction(undefined, isAdmin));
+
+      try {
+        await dispatch(dashboardProductsAction(undefined, isAdmin));
+      } catch (refreshError) {
+        console.log("Failed to refresh products after image upload", refreshError);
+      }
     } catch (error) {
       toast.error(
-        error?.response?.data?.description || "Product Image upload failed",
+        error?.response?.data?.description ||
+          error?.response?.data?.message ||
+          "Product image upload failed",
       );
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -658,6 +625,43 @@ export const getAllCategoriesDashboard = () => async (dispatch) => {
   }
 };
 
+export const getCategoriesPageForDashboard =
+  (queryString) => async (dispatch, getState) => {
+    dispatch({ type: "CATEGORY_LOADER" });
+
+    try {
+      let resolvedQueryString = queryString;
+      if (!resolvedQueryString) {
+        const pageNumber = getState()?.products?.pagination?.pageNumber ?? 0;
+        const pageSize = getState()?.products?.pagination?.pageSize ?? 10;
+        const params = new URLSearchParams();
+        params.set("pageNumber", pageNumber);
+        params.set("pageSize", pageSize);
+        resolvedQueryString = params.toString();
+      }
+
+      const { data } = await api.get(`/categories/page?${resolvedQueryString}`);
+
+      dispatch({
+        type: "FETCH_CATEGORIES",
+        payload: data?.content ?? [],
+        pageNumber: data?.pageNumber ?? 0,
+        pageSize: data?.pageSize ?? 10,
+        totalElements: data?.totalElements ?? 0,
+        totalPages: data?.totalPages ?? 0,
+        lastPage: Boolean(data?.lastPage),
+      });
+
+      dispatch({ type: "CATEGORY_SUCCESS" });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: "IS_ERROR",
+        payload: err?.response?.data?.message || "Failed to fetch categories",
+      });
+    }
+  };
+
 export const createCategoryDashboardAction =
   (sendData, setOpen, reset, toast) => async (dispatch, getState) => {
     try {
@@ -674,7 +678,7 @@ export const createCategoryDashboardAction =
       reset();
       toast.success("Category Created Successful");
       setOpen(false);
-      await dispatch(getAllCategoriesDashboard());
+      await dispatch(getCategoriesPageForDashboard());
     } catch (err) {
       console.log(err);
       toast.error(
@@ -705,7 +709,7 @@ export const updateCategoryDashboardAction =
       reset();
       toast.success("Category Update Successful");
       setOpen(false);
-      await dispatch(getAllCategoriesDashboard());
+      await dispatch(getCategoriesPageForDashboard());
     } catch (err) {
       console.log(err);
       toast.error(
@@ -735,7 +739,7 @@ export const deleteCategoryDashboardAction =
 
       toast.success("Category Delete Successful");
       setOpen(false);
-      await dispatch(getAllCategoriesDashboard());
+      await dispatch(getCategoriesPageForDashboard());
     } catch (err) {
       console.log(err);
       toast.error(err?.response?.data?.message || "Failed to delete category");
@@ -746,50 +750,3 @@ export const deleteCategoryDashboardAction =
     }
   };
 
-export const getAllSellersDashboard =
-  (queryString) => async (dispatch, getState) => {
-    const { user } = getState().auth;
-    try {
-      dispatch({ type: "IS_FETCHING" });
-      const { data } = await api.get(`/auth/sellers?${queryString}`);
-      dispatch({
-        type: "GET_SELLERS",
-        payload: data["content"],
-        pageNumber: data["pageNumber"],
-        pageSize: data["pageSize"],
-        totalElements: data["totalElements"],
-        totalPages: data["totalPages"],
-        lastPage: data["lastPage"],
-      });
-
-      dispatch({ type: "IS_SUCCESS" });
-    } catch (err) {
-      console.log(err);
-      dispatch({
-        type: "IS_ERROR",
-        payload: err?.response?.data?.message || "Failed to fetch sellers data",
-      });
-    }
-  };
-
-export const addNewDashboardSeller =
-  (sendData, toast, reset, setOpen, setLoader) => async (dispatch) => {
-    try {
-      setLoader(true);
-      await api.post("/auth/signup", sendData);
-      reset();
-      toast.success("Seller registered successfully!");
-
-      await dispatch(getAllSellersDashboard());
-    } catch (err) {
-      console.log(err);
-      toast.error(
-        err?.response?.data?.message ||
-          err?.response?.data?.password ||
-          "Internal Server Error",
-      );
-    } finally {
-      setLoader(false);
-      setOpen(false);
-    }
-  };

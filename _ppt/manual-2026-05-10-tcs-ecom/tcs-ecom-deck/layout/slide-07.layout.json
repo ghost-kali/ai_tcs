@@ -1,0 +1,605 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/goqpy7",
+    "id": "goqpy7",
+    "slide": 7,
+    "layoutId": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/byhgn29g",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0je9cvix",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#00A3A3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t47y1kre",
+      "id": "3",
+      "bbox": [
+        56,
+        34,
+        1168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Outcomes & Next Steps",
+      "textPreview": "Outcomes & Next Steps",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Outcomes & Next Steps"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Outcomes & Next Steps",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Outcomes & Next Steps",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#0B2E4A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "4",
+      "bbox": [
+        56,
+        124,
+        575,
+        520
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6xkf6dc",
+      "id": "5",
+      "bbox": [
+        76,
+        142,
+        535,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Outcomes",
+      "textPreview": "Outcomes",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Outcomes"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Outcomes",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Outcomes",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "6",
+      "bbox": [
+        76,
+        180,
+        535,
+        434
+      ],
+      "geometry": "rect",
+      "text": "• Built an end-to-end microservices platform with a single API entry point\n• Implemented JWT authentication and identity propagation pattern\n• Enforced role-based authorization for protected actions\n• Introduced Redis caching and resilience-ready components\n• Improved understanding of distributed debugging and API design",
+      "textPreview": "• Built an end-to-end microservices platform with a single API entry point | • Implemented JWT authentication and identity propagation pa...",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Built an end-to-end microservices platform with a single API entry point"
+          },
+          {
+            "index": 2,
+            "text": "• Implemented JWT authentication and identity propagation pattern"
+          },
+          {
+            "index": 3,
+            "text": "• Enforced role-based authorization for protected actions"
+          },
+          {
+            "index": 4,
+            "text": "• Introduced Redis caching and resilience-ready components"
+          },
+          {
+            "index": 5,
+            "text": "• Improved understanding of distributed debugging and API design"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Built an end-to-end microservices platform with a single API entry point",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Built an end-to-end microservices platform with a single API entry point",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Implemented JWT authentication and identity propagation pattern",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Implemented JWT authentication and identity propagation pattern",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Enforced role-based authorization for protected actions",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Enforced role-based authorization for protected actions",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• Introduced Redis caching and resilience-ready components",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Introduced Redis caching and resilience-ready components",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "• Improved understanding of distributed debugging and API design",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Improved understanding of distributed debugging and API design",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "7",
+      "bbox": [
+        649,
+        124,
+        575,
+        520
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixczed8v",
+      "id": "8",
+      "bbox": [
+        669,
+        142,
+        535,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Next Steps (Production)",
+      "textPreview": "Next Steps (Production)",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Next Steps (Production)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Next Steps (Production)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Next Steps (Production)",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bi9s36hc",
+      "id": "9",
+      "bbox": [
+        669,
+        180,
+        535,
+        434
+      ],
+      "geometry": "rect",
+      "text": "• Restrict service exposure (internal-only networking)\n• Add trust proof between gateway and services (mTLS or shared secret)\n• Centralize config/secrets via vault or secure config server\n• Add CI/CD pipeline + containerization + Kubernetes deployment\n• Expand observability: tracing, dashboards, alerts\n• Performance tests and capacity planning per service",
+      "textPreview": "• Restrict service exposure (internal-only networking) | • Add trust proof between gateway and services (mTLS or shared secret) | • Centr...",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 6,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Restrict service exposure (internal-only networking)"
+          },
+          {
+            "index": 2,
+            "text": "• Add trust proof between gateway and services (mTLS or shared secret)"
+          },
+          {
+            "index": 3,
+            "text": "• Centralize config/secrets via vault or secure config server"
+          },
+          {
+            "index": 4,
+            "text": "• Add CI/CD pipeline + containerization + Kubernetes deployment"
+          },
+          {
+            "index": 5,
+            "text": "• Expand observability: tracing, dashboards, alerts"
+          },
+          {
+            "index": 6,
+            "text": "• Performance tests and capacity planning per service"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Restrict service exposure (internal-only networking)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Restrict service exposure (internal-only networking)",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Add trust proof between gateway and services (mTLS or shared secret)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Add trust proof between gateway and services (mTLS or shared secret)",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Centralize config/secrets via vault or secure config server",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Centralize config/secrets via vault or secure config server",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "• Add CI/CD pipeline + containerization + Kubernetes deployment",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Add CI/CD pipeline + containerization + Kubernetes deployment",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "• Expand observability: tracing, dashboards, alerts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Expand observability: tracing, dashboards, alerts",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "text": "• Performance tests and capacity planning per service",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Performance tests and capacity planning per service",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "10",
+      "bbox": [
+        56,
+        668,
+        1168,
+        40
+      ],
+      "geometry": "rect",
+      "fillColor": "#ECFDF5",
+      "lineColor": "#A7F3D0",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "11",
+      "bbox": [
+        76,
+        678,
+        1128,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Ask: approval to proceed with production hardening (network isolation + gateway-to-service trust).",
+      "textPreview": "Ask: approval to proceed with production hardening (network isolation + gateway-to-service trust).",
+      "resolvedFontSize": 13.51,
+      "resolvedTextStyle": {
+        "fontSize": 13.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ask: approval to proceed with production hardening (network isolation + gateway-to-service trust)."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ask: approval to proceed with production hardening (network isolation + gateway-to-service trust).",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ask: approval to proceed with production hardening (network isolation + gateway-to-service trust).",
+              "fontSize": 13.51,
+              "typeface": "Aptos",
+              "color": "#065F46",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

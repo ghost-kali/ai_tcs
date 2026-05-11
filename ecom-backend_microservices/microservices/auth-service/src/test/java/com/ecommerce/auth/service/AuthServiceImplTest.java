@@ -17,7 +17,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -55,16 +54,13 @@ class AuthServiceImplTest {
     private JwtUtils jwtUtils;
 
     @Mock
-    private KafkaTemplate<String, Object> kafkaTemplate;
-
-    @Mock
     private RefreshTokenService refreshTokenService;
 
     @InjectMocks
     private AuthServiceImpl authService;
 
     @Test
-    void authenticateUser_returnsJwtAndRefreshToken_andPublishesEvent() {
+    void authenticateUser_returnsJwtAndRefreshToken() {
         // Given: login request
         LoginRequest loginRequest = new LoginRequest("alice", "secret");
 
@@ -94,8 +90,7 @@ class AuthServiceImplTest {
         // Then
         assertThat(response.getAccessToken()).isEqualTo("access.jwt");
         assertThat(response.getRefreshToken()).isEqualTo("refresh.jwt");
-        verify(userRepository).updateLastLogin(eq(7L), any());
-        verify(kafkaTemplate).send(eq("auth-events"), any());
+        org.mockito.Mockito.verify(userRepository).updateLastLogin(eq(7L), any());
     }
 
     @Test

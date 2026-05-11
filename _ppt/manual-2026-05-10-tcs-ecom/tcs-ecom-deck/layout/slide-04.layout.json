@@ -1,0 +1,1225 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/j7o4qi",
+    "id": "j7o4qi",
+    "slide": 4,
+    "layoutId": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmhk3q5o",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#00A3A3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y1kre1w7",
+      "id": "3",
+      "bbox": [
+        56,
+        34,
+        1168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Key Features Delivered",
+      "textPreview": "Key Features Delivered",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Key Features Delivered"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Key Features Delivered",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Key Features Delivered",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#0B2E4A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "4",
+      "bbox": [
+        56,
+        120,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/1032lszq",
+      "id": "5",
+      "bbox": [
+        72,
+        136,
+        24,
+        24
+      ],
+      "alt": "shield-check icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "fa221466-d459-4d0d-9aa0-a6f021b63265",
+        "contentType": "image/svg+xml",
+        "byteLength": 383
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "6",
+      "bbox": [
+        104,
+        134,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Authentication",
+      "textPreview": "Authentication",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Authentication"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Authentication",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Authentication",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "7",
+      "bbox": [
+        72,
+        172,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Sign-in / Sign-up\n• JWT + refresh token flow\n• Gateway validates JWT once",
+      "textPreview": "• Sign-in / Sign-up | • JWT + refresh token flow | • Gateway validates JWT once",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Sign-in / Sign-up"
+          },
+          {
+            "index": 2,
+            "text": "• JWT + refresh token flow"
+          },
+          {
+            "index": 3,
+            "text": "• Gateway validates JWT once"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Sign-in / Sign-up",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Sign-in / Sign-up",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• JWT + refresh token flow",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• JWT + refresh token flow",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Gateway validates JWT once",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Gateway validates JWT once",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cvixcze",
+      "id": "8",
+      "bbox": [
+        451.33,
+        120,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/54zidony",
+      "id": "9",
+      "bbox": [
+        467.33,
+        136,
+        24,
+        24
+      ],
+      "alt": "package icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "0ae7f199-f914-4681-85b4-bb0d657db271",
+        "contentType": "image/svg+xml",
+        "byteLength": 406
+      }
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "10",
+      "bbox": [
+        499.33,
+        134,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Product & Catalog",
+      "textPreview": "Product & Catalog",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Product & Catalog"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Product & Catalog",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Product & Catalog",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "11",
+      "bbox": [
+        467.33,
+        172,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Products, categories\n• Public browsing endpoints\n• Role-protected admin actions",
+      "textPreview": "• Products, categories | • Public browsing endpoints | • Role-protected admin actions",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Products, categories"
+          },
+          {
+            "index": 2,
+            "text": "• Public browsing endpoints"
+          },
+          {
+            "index": 3,
+            "text": "• Role-protected admin actions"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Products, categories",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Products, categories",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Public browsing endpoints",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Public browsing endpoints",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Role-protected admin actions",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Role-protected admin actions",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "12",
+      "bbox": [
+        846.67,
+        120,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/idonyd0z",
+      "id": "13",
+      "bbox": [
+        862.67,
+        136,
+        24,
+        24
+      ],
+      "alt": "shopping-cart icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "f7df038f-be46-499f-9d1b-a3ca3a750b6c",
+        "contentType": "image/svg+xml",
+        "byteLength": 337
+      }
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "14",
+      "bbox": [
+        894.67,
+        134,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Cart & Orders",
+      "textPreview": "Cart & Orders",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Cart & Orders"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Cart & Orders",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Cart & Orders",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "15",
+      "bbox": [
+        862.67,
+        172,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Cart operations\n• Order placement\n• Address management",
+      "textPreview": "• Cart operations | • Order placement | • Address management",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Cart operations"
+          },
+          {
+            "index": 2,
+            "text": "• Order placement"
+          },
+          {
+            "index": 3,
+            "text": "• Address management"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Cart operations",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Cart operations",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Order placement",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Order placement",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Address management",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Address management",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "16",
+      "bbox": [
+        56,
+        308,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/il0rqd4v",
+      "id": "17",
+      "bbox": [
+        72,
+        324,
+        24,
+        24
+      ],
+      "alt": "credit-card icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "8a52b341-451b-43ef-adee-b3b17cadad24",
+        "contentType": "image/svg+xml",
+        "byteLength": 271
+      }
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "18",
+      "bbox": [
+        104,
+        322,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Payments",
+      "textPreview": "Payments",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Payments"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Payments",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Payments",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "19",
+      "bbox": [
+        72,
+        360,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Payment service\n• External payment integration\n• Separation from order domain",
+      "textPreview": "• Payment service | • External payment integration | • Separation from order domain",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Payment service"
+          },
+          {
+            "index": 2,
+            "text": "• External payment integration"
+          },
+          {
+            "index": 3,
+            "text": "• Separation from order domain"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Payment service",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Payment service",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• External payment integration",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• External payment integration",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Separation from order domain",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Separation from order domain",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "20",
+      "bbox": [
+        451.33,
+        308,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/5kb6xkf6",
+      "id": "21",
+      "bbox": [
+        467.33,
+        324,
+        24,
+        24
+      ],
+      "alt": "activity icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "4906277f-b2ee-4cab-ac22-d8ce39128299",
+        "contentType": "image/svg+xml",
+        "byteLength": 318
+      }
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "22",
+      "bbox": [
+        499.33,
+        322,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Resilience",
+      "textPreview": "Resilience",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Resilience"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Resilience",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Resilience",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovahoza1",
+      "id": "23",
+      "bbox": [
+        467.33,
+        360,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Circuit breaker ready\n• Fault isolation per service\n• Gateway-level stability",
+      "textPreview": "• Circuit breaker ready | • Fault isolation per service | • Gateway-level stability",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Circuit breaker ready"
+          },
+          {
+            "index": 2,
+            "text": "• Fault isolation per service"
+          },
+          {
+            "index": 3,
+            "text": "• Gateway-level stability"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Circuit breaker ready",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Circuit breaker ready",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Fault isolation per service",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Fault isolation per service",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Gateway-level stability",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Gateway-level stability",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "24",
+      "bbox": [
+        846.67,
+        308,
+        377.33,
+        170
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 25,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/5sneloj2",
+      "id": "25",
+      "bbox": [
+        862.67,
+        324,
+        24,
+        24
+      ],
+      "alt": "radar icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "9edaec7a-b58c-49f8-962b-cfc30b6fde18",
+        "contentType": "image/svg+xml",
+        "byteLength": 471
+      }
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "26",
+      "bbox": [
+        894.67,
+        322,
+        313.33,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Observability",
+      "textPreview": "Observability",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Observability"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Observability",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Observability",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "27",
+      "bbox": [
+        862.67,
+        360,
+        345.33,
+        106
+      ],
+      "geometry": "rect",
+      "text": "• Actuator endpoints\n• Structured logs (ELK ready)\n• Tracing hooks available",
+      "textPreview": "• Actuator endpoints | • Structured logs (ELK ready) | • Tracing hooks available",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Actuator endpoints"
+          },
+          {
+            "index": 2,
+            "text": "• Structured logs (ELK ready)"
+          },
+          {
+            "index": 3,
+            "text": "• Tracing hooks available"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Actuator endpoints",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Actuator endpoints",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Structured logs (ELK ready)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Structured logs (ELK ready)",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Tracing hooks available",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Tracing hooks available",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "28",
+      "bbox": [
+        56,
+        684,
+        1168,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Slide 4 / 7",
+      "textPreview": "Slide 4 / 7",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Slide 4 / 7"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Slide 4 / 7",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Slide 4 / 7",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#94A3B8"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

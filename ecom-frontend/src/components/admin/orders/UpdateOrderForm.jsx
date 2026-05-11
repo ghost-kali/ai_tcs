@@ -1,7 +1,7 @@
 import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material'
 import React, { useState } from 'react'
 import { FaSpinner } from 'react-icons/fa';
-import Spinners from '../../shared/Spinners';
+import { Spinners } from '../../../ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrderStatusFromDashboard } from '../../../store/actions';
 import toast from 'react-hot-toast';

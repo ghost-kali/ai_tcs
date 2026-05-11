@@ -1,0 +1,883 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/0boiub",
+    "id": "0boiub",
+    "slide": 6,
+    "layoutId": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "428d8cb7-ca2b-49ea-a890-59ad10380133",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "9e2b10b2-de78-49a3-92ae-fe729ba17b46",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#00A3A3",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "3",
+      "bbox": [
+        56,
+        34,
+        1168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "What I Learned",
+      "textPreview": "What I Learned",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "What I Learned"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "What I Learned",
+          "runs": [
+            {
+              "index": 1,
+              "text": "What I Learned",
+              "fontSize": 30,
+              "typeface": "Aptos Display",
+              "color": "#0B2E4A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "4",
+      "bbox": [
+        56,
+        118,
+        575,
+        254
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/knih4byh",
+      "id": "5",
+      "bbox": [
+        74,
+        136,
+        22,
+        22
+      ],
+      "alt": "network icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "51eae2f4-e22e-4eeb-81be-89443cd106a5",
+        "contentType": "image/svg+xml",
+        "byteLength": 401
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2t83itgf",
+      "id": "6",
+      "bbox": [
+        104,
+        134,
+        509,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Spring Cloud Patterns",
+      "textPreview": "Spring Cloud Patterns",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Spring Cloud Patterns"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Spring Cloud Patterns",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Spring Cloud Patterns",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "7",
+      "bbox": [
+        74,
+        172,
+        539,
+        182
+      ],
+      "geometry": "rect",
+      "text": "• API Gateway routing and global filters\n• Service discovery with Eureka and client-side load balancing\n• Central configuration patterns",
+      "textPreview": "• API Gateway routing and global filters | • Service discovery with Eureka and client-side load balancing | • Central configuration patterns",
+      "resolvedFontSize": 13.2,
+      "resolvedTextStyle": {
+        "fontSize": 13.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• API Gateway routing and global filters"
+          },
+          {
+            "index": 2,
+            "text": "• Service discovery with Eureka and client-side load balancing"
+          },
+          {
+            "index": 3,
+            "text": "• Central configuration patterns"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• API Gateway routing and global filters",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• API Gateway routing and global filters",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Service discovery with Eureka and client-side load balancing",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Service discovery with Eureka and client-side load balancing",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Central configuration patterns",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Central configuration patterns",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gvy90je9",
+      "id": "8",
+      "bbox": [
+        649,
+        118,
+        575,
+        254
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/kre1w7mp",
+      "id": "9",
+      "bbox": [
+        667,
+        136,
+        22,
+        22
+      ],
+      "alt": "lock icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "b452b841-8ef8-4011-a1e8-5411ac385c83",
+        "contentType": "image/svg+xml",
+        "byteLength": 277
+      }
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "10",
+      "bbox": [
+        697,
+        134,
+        509,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Security Engineering",
+      "textPreview": "Security Engineering",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Security Engineering"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Security Engineering",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Security Engineering",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovahoza1",
+      "id": "11",
+      "bbox": [
+        667,
+        172,
+        539,
+        182
+      ],
+      "geometry": "rect",
+      "text": "• JWT design: claims, expiry, signature validation\n• Centralize validation at gateway + propagate identity\n• Role-based authorization with Spring Security",
+      "textPreview": "• JWT design: claims, expiry, signature validation | • Centralize validation at gateway + propagate identity | • Role-based authorization...",
+      "resolvedFontSize": 13.2,
+      "resolvedTextStyle": {
+        "fontSize": 13.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• JWT design: claims, expiry, signature validation"
+          },
+          {
+            "index": 2,
+            "text": "• Centralize validation at gateway + propagate identity"
+          },
+          {
+            "index": 3,
+            "text": "• Role-based authorization with Spring Security"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• JWT design: claims, expiry, signature validation",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• JWT design: claims, expiry, signature validation",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Centralize validation at gateway + propagate identity",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Centralize validation at gateway + propagate identity",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Role-based authorization with Spring Security",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Role-based authorization with Spring Security",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "12",
+      "bbox": [
+        56,
+        390,
+        575,
+        254
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/dcbulwva",
+      "id": "13",
+      "bbox": [
+        74,
+        408,
+        22,
+        22
+      ],
+      "alt": "zap icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "f1882b72-038d-4c05-9283-9b6b80523da5",
+        "contentType": "image/svg+xml",
+        "byteLength": 351
+      }
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "14",
+      "bbox": [
+        104,
+        406,
+        509,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Performance & Reliability",
+      "textPreview": "Performance & Reliability",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Performance & Reliability"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Performance & Reliability",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Performance & Reliability",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "15",
+      "bbox": [
+        74,
+        444,
+        539,
+        182
+      ],
+      "geometry": "rect",
+      "text": "• Caching strategy (Redis) for repeated token validations\n• Resilience4j concepts (timeouts, circuit breakers)\n• Designing idempotent service APIs",
+      "textPreview": "• Caching strategy (Redis) for repeated token validations | • Resilience4j concepts (timeouts, circuit breakers) | • Designing idempotent...",
+      "resolvedFontSize": 13.2,
+      "resolvedTextStyle": {
+        "fontSize": 13.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Caching strategy (Redis) for repeated token validations"
+          },
+          {
+            "index": 2,
+            "text": "• Resilience4j concepts (timeouts, circuit breakers)"
+          },
+          {
+            "index": 3,
+            "text": "• Designing idempotent service APIs"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Caching strategy (Redis) for repeated token validations",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Caching strategy (Redis) for repeated token validations",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Resilience4j concepts (timeouts, circuit breakers)",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Resilience4j concepts (timeouts, circuit breakers)",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Designing idempotent service APIs",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Designing idempotent service APIs",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "16",
+      "bbox": [
+        649,
+        390,
+        575,
+        254
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/donyd0z6",
+      "id": "17",
+      "bbox": [
+        667,
+        408,
+        22,
+        22
+      ],
+      "alt": "wrench icon",
+      "contentType": "image/svg+xml",
+      "asset": {
+        "assetId": "eb9f2f32-4251-41c8-8c4d-b73986b24bed",
+        "contentType": "image/svg+xml",
+        "byteLength": 389
+      }
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "18",
+      "bbox": [
+        697,
+        406,
+        509,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Engineering Practices",
+      "textPreview": "Engineering Practices",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Engineering Practices"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Engineering Practices",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Engineering Practices",
+              "fontSize": 16,
+              "typeface": "Aptos",
+              "color": "#0F172A",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "19",
+      "bbox": [
+        667,
+        444,
+        539,
+        182
+      ],
+      "geometry": "rect",
+      "text": "• Clean DTO boundaries vs entity exposure\n• Meaningful error handling and consistent API contracts\n• Debugging distributed flows across services",
+      "textPreview": "• Clean DTO boundaries vs entity exposure | • Meaningful error handling and consistent API contracts | • Debugging distributed flows acro...",
+      "resolvedFontSize": 13.2,
+      "resolvedTextStyle": {
+        "fontSize": 13.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Clean DTO boundaries vs entity exposure"
+          },
+          {
+            "index": 2,
+            "text": "• Meaningful error handling and consistent API contracts"
+          },
+          {
+            "index": 3,
+            "text": "• Debugging distributed flows across services"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Clean DTO boundaries vs entity exposure",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Clean DTO boundaries vs entity exposure",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "• Meaningful error handling and consistent API contracts",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Meaningful error handling and consistent API contracts",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "• Debugging distributed flows across services",
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Debugging distributed flows across services",
+              "fontSize": 13.2,
+              "typeface": "Aptos",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gvy90je9",
+      "id": "20",
+      "bbox": [
+        56,
+        684,
+        1168,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Slide 6 / 7",
+      "textPreview": "Slide 6 / 7",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "Aptos",
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Slide 6 / 7"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Slide 6 / 7",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Slide 6 / 7",
+              "fontSize": 11,
+              "typeface": "Aptos",
+              "color": "#94A3B8"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
